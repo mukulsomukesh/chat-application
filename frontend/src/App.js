@@ -1,7 +1,12 @@
+import Signin from "./routes/Signin";
+import Signup from "./routes/Signup";
 
 function App() {
   return (
-<h1> hlo </h1>
+<div>
+  {/* <Signin /> */}
+  <Signup />
+</div>
   );
 }
 
