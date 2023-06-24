@@ -11,11 +11,11 @@ const Signup = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const sign_up_processing = useSelector((state)=>state.authReducer.sign_up_processing);
-    const sign_up_message = useSelector((state)=>state.authReducer.sign_up_message);
-    const sign_up_success = useSelector((state)=>state.authReducer.sign_up_success);
-    const sign_up_failed = useSelector((state)=>state.authReducer.sign_up_failed);
-    
+    const sign_up_processing = useSelector((state) => state.authReducer.sign_up_processing);
+    const sign_up_message = useSelector((state) => state.authReducer.sign_up_message);
+    const sign_up_success = useSelector((state) => state.authReducer.sign_up_success);
+    const sign_up_failed = useSelector((state) => state.authReducer.sign_up_failed);
+
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
@@ -43,19 +43,19 @@ const Signup = () => {
             email: formData.email.trim()
         }
 
-        if(user.password.length > 30 || user.email.length > 40 || user.name.length > 30 || formData.confirmPassword.trim().length>30){
+        if (user.password.length > 30 || user.email.length > 40 || user.name.length > 30 || formData.confirmPassword.trim().length > 30) {
             toast.error('Maximum input length exceeded', { position: toast.POSITION.BOTTOM_LEFT });
             return;
         }
-        else if(user.password !== formData.confirmPassword.trim()){
+        else if (user.password !== formData.confirmPassword.trim()) {
             toast.error('Passwords do not match', { position: toast.POSITION.BOTTOM_LEFT });
             return;
         }
-        else if(user.password.length<7){
+        else if (user.password.length < 7) {
             toast.error('Password must be at least 8 characters long', { position: toast.POSITION.BOTTOM_LEFT });
             return;
         }
-        else{
+        else {
             dispatch(createAccount(user));
         }
     };
@@ -66,16 +66,16 @@ const Signup = () => {
     };
 
 
-    useEffect(()=>{
-console.log(!sign_up_processing && sign_up_failed && !sign_up_success)
-        if(!sign_up_processing && sign_up_failed && !sign_up_success){
-            toast.error(sign_up_message, { position: toast.POSITION.BOTTOM_LEFT });            
+    //  useEffect
+    useEffect(() => {
+        if (!sign_up_processing && sign_up_failed && !sign_up_success) {
+            toast.error(sign_up_message, { position: toast.POSITION.BOTTOM_LEFT });
         }
-        if(!sign_up_processing && !sign_up_failed && sign_up_success){
-            toast.success("Account Successfully Created.", { position: toast.POSITION.BOTTOM_LEFT });            
+        if (!sign_up_processing && !sign_up_failed && sign_up_success) {
+            toast.success("Account Successfully Created.", { position: toast.POSITION.BOTTOM_LEFT });
         }
 
-    },[sign_up_processing, sign_up_success, sign_up_failed])
+    }, [sign_up_processing, sign_up_success, sign_up_failed])
 
 
     return (
@@ -170,7 +170,7 @@ console.log(!sign_up_processing && sign_up_failed && !sign_up_success)
                             </button>
 
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Already have an account? <span onClick={(e)=>{ navigate("/signin") }} className="cursor-pointer font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</span>
+                                Already have an account? <span onClick={(e) => { navigate("/signin") }} className="cursor-pointer font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</span>
                             </p>
                         </form>
                     </div>

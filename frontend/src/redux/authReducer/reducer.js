@@ -56,6 +56,7 @@ console.log(type, payload)
                 sign_in_processing: false,
                 sign_in_failed: true,
                 sign_in_success: false,
+                sign_in_message:payload
             };
         case types.SIGN_IN_REQUEST_SUCCESS:
             return {
@@ -63,6 +64,7 @@ console.log(type, payload)
                 sign_in_processing: false,
                 sign_in_failed: false,
                 sign_in_success: true,
+                sign_in_message:"Login Success."                
             };
         default:
             return state;   
