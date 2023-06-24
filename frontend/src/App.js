@@ -1,4 +1,3 @@
-import Signin from "./routes/Signin";
 import Signup from "./routes/Signup";
 
 function App() {
@@ -6,6 +5,7 @@ function App() {
 <div>
   {/* <Signin /> */}
   <Signup />
+  {/*  */}
 </div>
   );
 }
