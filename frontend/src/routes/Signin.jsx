@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { BiSolidHide , BiShow} from "react-icons/bi";
+import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -78,7 +80,7 @@ const Signin = () => {
                 Sign in
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don't have an account? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                Don't have an account? <span onClick={()=>{ navigate("/signup") }} className="font-medium cursor-pointer text-primary-600 hover:underline dark:text-primary-500">Sign up</span>
               </p>
             </form>
           </div>

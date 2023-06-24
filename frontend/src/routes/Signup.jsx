@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { createAccount } from "../redux/authReducer/action";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const Signup = () => {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const sign_up_processing = useSelector((state)=>state.authReducer.sign_up_processing);
     const sign_up_message = useSelector((state)=>state.authReducer.sign_up_message);
@@ -168,7 +170,7 @@ console.log(!sign_up_processing && sign_up_failed && !sign_up_success)
                             </button>
 
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Already have an account? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</a>
+                                Already have an account? <span onClick={(e)=>{ navigate("/signin") }} className="cursor-pointer font-medium text-primary-600 hover:underline dark:text-primary-500">Sign in</span>
                             </p>
                         </form>
                     </div>

@@ -1,11 +1,12 @@
+import AllRoutes from "./routes/AllRoutes";
 import Signup from "./routes/Signup";
 
 function App() {
   return (
 <div>
-  {/* <Signin /> */}
-  <Signup />
-  {/*  */}
+
+  <AllRoutes />
+
 </div>
   );
 }
