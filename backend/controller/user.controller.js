@@ -74,4 +74,22 @@ const authUser = asyncHandler(async (req, res) => {
 })
 
 
-module.exports = { registerUser, authUser };
+//  get list of all users
+const searchUser = asyncHandler(async(req, res)=>{
+
+    const search = req.query.search ? {
+        $or:[
+            {name : { $regex: req.query.search, $options: 'i' }},
+            {email : { $regex: req.query.search, $options: 'i' }},
+             ]
+    }:{}
+
+    const users = await User.find(search).find({_id:{$ne:req.user._id}});
+
+    res.status(200).json(users)
+
+
+})
+
+
+module.exports = { registerUser, authUser, searchUser };
