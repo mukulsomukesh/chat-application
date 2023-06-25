@@ -17,15 +17,13 @@ const registerUser = asyncHandler(async (req, res) => {
 
     //  check if all fields are filled
     if (!name || !email || !password) {
-        res.status(400);
-        throw new Error("Please Fill All The Fields.");
+        res.status(422).json({error:"Please Fill All The Fields."})
     }
 
     // check if user already created
     const userExist = await User.findOne({ email });
     if (userExist) {
-        res.status(400);
-        throw new Error("User Already Exist.");
+        return res.status(422).json({error:"User Already Exist."})
     }
 
     //  hashed password
@@ -43,8 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
         })
     }
     else {
-        res.status(400);
-        throw new Error("Failed to create user.")
+            return res.status(422).json({error:"Login Failed."})
     }
 })
 
@@ -56,8 +53,7 @@ const authUser = asyncHandler(async (req, res) => {
 
     //  check if all fields are filled
     if (!email || !password) {
-        res.status(400);
-        throw new Error("Please Fill All The Fields.");
+        res.status(422).json({error:"Please Fill All The Fields."})
     }
 
     // find user 
@@ -73,8 +69,7 @@ const authUser = asyncHandler(async (req, res) => {
         })
     }
     else{
-        res.status(400);
-        throw new Error("Incorrect email or password.");
+        res.status(422).json({error:"Incorrect email or password."})
     }
 })
 
