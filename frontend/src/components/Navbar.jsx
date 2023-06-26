@@ -21,7 +21,7 @@ export default function Navbar() {
                     Chat Application
                 </span>
                 :
-                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <div className=" flex flex-wrap items-center justify-between mx-auto p-4 px-10">
                     <SideBar />
                     <section class="flex flex-wrap gap-4 items-center">
                         <Notification />

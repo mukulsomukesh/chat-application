@@ -18,7 +18,7 @@ const signInAccount = (user) => async (dispatch) => {
     try {
         const result = await axios.post("http://localhost:8080/api/user/login", user)
 
-        localStorage.setItem("userData", JSON.stringify(result.data));
+        localStorage.setItem("chat-app-login-user-data", JSON.stringify(result.data));
         dispatch({ type: types.SIGN_IN_REQUEST_SUCCESS, payload: result.data});
     } catch (error) {
         dispatch({ type: types.SIGN_IN_REQUEST_FAILED, payload: error.response.data.error});
