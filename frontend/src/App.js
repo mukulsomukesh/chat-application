@@ -4,7 +4,7 @@ import Signup from "./routes/Signup";
 
 function App() {
   return (
-    <div>
+    <div className="h-screen overflow-hidden">
 
       <Navbar />
       <AllRoutes />

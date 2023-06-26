@@ -5,15 +5,10 @@ import Notification from './Notification';
 import { useSelector } from 'react-redux';
 
 export default function Navbar() {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const sign_in_success = useSelector((state) => state.authReducer.sign_in_success);
 
-    const handleProfileClick = () => {
-        setIsPopupOpen(!isPopupOpen);
-    };
-
     return (
-        <nav className="bg-gray-800 border-gray-200 ">
+        <nav className="bg-gray-800 border-gray-200">
 
             {!sign_in_success ?
                 <span href="#" className=" text-white flex flex-wrap items-center mx-auto p-4">

@@ -6,6 +6,9 @@ const initialState = {
     isSearchUserSuccess: false,
     searchedUser: [],
 
+    singleUserChatProcessing:false,
+    singleUserChatsuccess:false,
+    singleUserChatObj:{},
 }
 
 export const reducer = (state = initialState, action) => {
@@ -34,6 +37,28 @@ export const reducer = (state = initialState, action) => {
                 isSearchUserSuccess: false,
                 searchedUser: [],
             };
+            case types.SINGLE_CHAT_CREATE_PROCESSING:
+                return {
+                    ...state,
+                    singleUserChatProcessing:true,
+                    singleUserChatsuccess:false,
+                    singleUserChatObj:{},
+                };
+            case types.SINGLE_CHAT_CREATE_SUCCESS:
+                return {
+                    ...state,
+                    singleUserChatProcessing:false,
+                    singleUserChatsuccess:true,
+                    singleUserChatObj:payload,
+                };
+            case types.SINGLE_CHAT_CREATE_FAIL:
+                return {
+                    ...state,
+                    singleUserChatProcessing:false,
+                    singleUserChatsuccess:false,
+                    singleUserChatObj:{},
+                };
+        
         default:
             return state;
     }

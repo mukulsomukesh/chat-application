@@ -86,17 +86,12 @@ export default function SideBar() {
 
           {/* map searched result  */}
           {searchedUser.length != 0 && searchedUser?.map((item) => (
-            <UserCard name={item.name}
+            <UserCard
+              userId={item._id}
+              name={item.name}
               email={item.email}
               imageSrc={item.pic} />
           ))}
-
-          {/* error message */}
-          {!isSearchUserProcessing && !isSearchUserSuccess && (
-            <p className="text-gray-500 text-center mt-4">
-              Request Failed.
-            </p>
-          )}
 
         </nav>
       </aside>
