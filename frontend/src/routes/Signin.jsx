@@ -59,6 +59,11 @@ const Signin = () => {
     }
     if (!sign_in_processing && !sign_in_failed && sign_in_success) {
       toast.success("Account Successfully Created.", { position: toast.POSITION.BOTTOM_LEFT });
+      
+      setTimeout(()=>{
+        navigate("/")
+    }, 500)
+      
     }
 
   }, [sign_in_processing, sign_in_success, sign_in_failed])

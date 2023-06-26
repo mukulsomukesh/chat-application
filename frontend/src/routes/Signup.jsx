@@ -73,6 +73,11 @@ const Signup = () => {
         }
         if (!sign_up_processing && !sign_up_failed && sign_up_success) {
             toast.success("Account Successfully Created.", { position: toast.POSITION.BOTTOM_LEFT });
+
+            setTimeout(()=>{
+                navigate("/signin")
+            }, 1000)
+
         }
 
     }, [sign_up_processing, sign_up_success, sign_up_failed])
