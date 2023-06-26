@@ -14,7 +14,7 @@ const searchUsers = (query) => async (dispatch) => {
   try {
     const result = await axios.get(`${END_POINT}/user?search=${query}`, {
       headers: {
-        Authorization: jwtToken() 
+        Authorization: jwtToken()
       }
     });
     dispatch({ type: types.SEARCH_USER_SUCCESS, payload: result.data });
@@ -24,10 +24,10 @@ const searchUsers = (query) => async (dispatch) => {
 };
 
 // creating one to one chat
-const createSingleUserChat = (userId) => async (dispatch) =>{
+const createSingleUserChat = (userId) => async (dispatch) => {
   dispatch({ type: types.SINGLE_CHAT_CREATE_PROCESSING });
   try {
-    const result = await axios.post(`${END_POINT}/chat`, {userId:userId} , {
+    const result = await axios.post(`${END_POINT}/chat`, { userId: userId }, {
       headers: {
         Authorization: jwtToken()
       }
@@ -35,9 +35,27 @@ const createSingleUserChat = (userId) => async (dispatch) =>{
 
     localStorage.setItem("chat-app-single-user-chat", JSON.stringify(result.data));
     dispatch({ type: types.SINGLE_CHAT_CREATE_SUCCESS, payload: result.data });
+
   } catch (error) {
     dispatch({ type: types.SINGLE_CHAT_CREATE_FAIL });
   }
 }
 
-export { searchUsers, createSingleUserChat };
+
+//  get all chat 
+const getChats = () => async (dispatch) => {
+  dispatch({ type: types.ALL_CHATS_REQUEST_PROCESSING });
+  try {
+    const result = await axios.get(`${END_POINT}/chat`, {
+      headers: {
+        Authorization: jwtToken()
+      }
+    })
+    dispatch({ type: types.ALL_CHATS_REQUEST_SUCCESS, payload: result.data });
+  } catch (error) {
+    dispatch({ type: types.ALL_CHATS_REQUEST_FAIL, payload: error.response.data.error });
+  }
+}
+
+
+export { searchUsers, createSingleUserChat, getChats };

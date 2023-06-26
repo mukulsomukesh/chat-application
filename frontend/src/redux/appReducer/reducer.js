@@ -9,6 +9,11 @@ const initialState = {
     singleUserChatProcessing:false,
     singleUserChatsuccess:false,
     singleUserChatObj:{},
+
+    getAllChatProcessing:false,
+    getAllChatSuccess:false,
+    getAllChatFail:false,
+    allChat:[]
 }
 
 export const reducer = (state = initialState, action) => {
@@ -58,7 +63,32 @@ export const reducer = (state = initialState, action) => {
                     singleUserChatsuccess:false,
                     singleUserChatObj:{},
                 };
-        
+
+                case types.ALL_CHATS_REQUEST_PROCESSING:
+                    return {
+                        ...state,
+                        getAllChatProcessing:true,
+                        getAllChatSuccess:false,
+                        getAllChatFail:false,
+                        allChat:[]
+                    };
+                case types.ALL_CHATS_REQUEST_SUCCESS:
+                    return {
+                        ...state,
+                        getAllChatProcessing:false,
+                        getAllChatSuccess:true,
+                        getAllChatFail:false,
+                        allChat:payload
+                    };
+                case types.ALL_CHATS_REQUEST_FAIL:
+                    return {
+                        ...state,
+                        getAllChatProcessing:false,
+                        getAllChatSuccess:false,
+                        getAllChatFail:true,
+                        allChat:[]
+                    };            
+                     
         default:
             return state;
     }
