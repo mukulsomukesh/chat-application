@@ -1,31 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import UserProfile from './UserProfile';
 import SideBar from './SideBar';
 import Notification from './Notification';
 import { useSelector } from 'react-redux';
 
 export default function Navbar() {
-    const sign_in_success = useSelector((state) => state.authReducer.sign_in_success);
+  const sign_in_success = useSelector((state) => state.authReducer.sign_in_success);
 
-    return (
-        <nav className="bg-gray-800 border-gray-200">
+  return (
+    <nav className="bg-primary-800 border-primary-200">
 
-            {!sign_in_success ?
-                <span href="#" className=" text-white flex flex-wrap items-center mx-auto p-4">
-                    <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
-                    Chat Application
-                </span>
-                :
-                <div className=" flex flex-wrap items-center justify-between mx-auto p-4 px-10">
-                    <SideBar />
-                    <section class="flex flex-wrap gap-4 items-center">
-                        <Notification />
-                        <UserProfile />
-                    </section>
-                </div>
-            }
+      {sign_in_success &&  (
+        <div className="flex flex-wrap items-center justify-between mx-auto p-4 px-10">
+          <SideBar />
+          <section className="flex flex-wrap gap-4 items-center">
+            <Notification />
+            <UserProfile />
+          </section>
+        </div>
+      )}
 
-
-        </nav>
-    );
+    </nav>
+  );
 }
