@@ -10,6 +10,11 @@ const jwtToken = () => {
 
 // search users
 const searchUsers = (query) => async (dispatch) => {
+
+  if (query.length == 0) {
+    return false
+  }
+
   dispatch({ type: types.SEARCH_USER_PROCESSING });
   try {
     const result = await axios.get(`${END_POINT}/user?search=${query}`, {
@@ -58,4 +63,26 @@ const getChats = () => async (dispatch) => {
 }
 
 
-export { searchUsers, createSingleUserChat, getChats };
+// creating group
+const createGroup = (obj) => async (dispatch) => {
+  console.log("post ",JSON.stringify(obj))
+  dispatch({ type: types.CREATE_GROUP_REQUEST_PROCESSING });
+  try {
+    const result = await axios.post(`${END_POINT}/chat/group`, obj, {
+      headers: {
+        Authorization: jwtToken()
+      }
+    });
+
+    console.log(result)
+
+    dispatch({ type: types.CREATE_GROUP_REQUEST_SUCCESS, payload: result.data });
+
+  } catch (error) {
+    console.log(error)
+
+    dispatch({ type: types.CREATE_GROUP_REQUEST_FAIL });
+  }
+}
+
+export { searchUsers, createSingleUserChat, getChats, createGroup };

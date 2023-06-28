@@ -9,7 +9,7 @@ const initialState = {
 
     sign_in_processing: false,
     sign_in_failed: false,
-    sign_in_success: false,
+    sign_in_success: true,
     sign_in_message:"",
     sign_in_User: {},
 }
