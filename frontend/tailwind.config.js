@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   content: ["./src/**/*.{html,js}"],
@@ -6,15 +5,16 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          100: '#E6F6FF',
-          200: '#B3E5FC',
-          300: '#81D4FA',
-          400: '#4FC3F7',
-          500: '#29B6F6',
-          600: '#03A9F4',
-          700: '#039BE5',
-          800: '#0288D1',
-          900: '#0277BD',
+          50: '#F3F4F6',
+          100: '#E5E7EB',
+          200: '#D1D5DB',
+          300: '#9CA3AF',
+          400: '#6B7280',
+          500: '#4B5563',
+          600: '#374151',
+          700: '#1F2937',
+          800: '#111827',
+          900: '#0C111B',
         },
       },
     },

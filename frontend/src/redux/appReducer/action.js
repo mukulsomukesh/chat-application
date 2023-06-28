@@ -65,7 +65,6 @@ const getChats = () => async (dispatch) => {
 
 // creating group
 const createGroup = (obj) => async (dispatch) => {
-  console.log("post ",JSON.stringify(obj))
   dispatch({ type: types.CREATE_GROUP_REQUEST_PROCESSING });
   try {
     const result = await axios.post(`${END_POINT}/chat/group`, obj, {
@@ -73,8 +72,6 @@ const createGroup = (obj) => async (dispatch) => {
         Authorization: jwtToken()
       }
     });
-
-    console.log(result)
 
     dispatch({ type: types.CREATE_GROUP_REQUEST_SUCCESS, payload: result.data });
 

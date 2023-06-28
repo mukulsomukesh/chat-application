@@ -20,7 +20,7 @@ export default function AllChats() {
 
       {allChat?.map((item) => (
 
-        <UserCard name={item.chatName} />
+        <UserCard name={item.chatName} key={item.id} />
 
       ))}
 

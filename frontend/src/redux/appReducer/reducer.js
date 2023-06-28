@@ -26,7 +26,7 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
 
     const { type, payload } = action;
-    console.log(type, payload)
+
     switch (type) {
         case types.SEARCH_USER_PROCESSING:
             return {

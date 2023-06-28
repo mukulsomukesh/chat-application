@@ -26,7 +26,7 @@ export default function Notification() {
   return (
     <div className="relative">
       <button
-        className="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700 focus:outline-none"
+        className="bg-primary-800 text-white p-2 rounded-full hover:bg-primary-700 focus:outline-none"
         onClick={handleProfileClick}
       >
         <BiSolidBell className="w-6 h-6" />

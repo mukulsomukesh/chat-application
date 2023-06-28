@@ -92,7 +92,7 @@ export default function CreateGroupChat() {
         <section>
             <button
                 onClick={toggleModal}
-                className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="block text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 type="button"
             >
                 Create Group
@@ -104,7 +104,7 @@ export default function CreateGroupChat() {
                         <div className="text-left">
                             <h3 className="mb-5 text-lg font-normal">Create Group</h3>
 
-                            {/*  group name input */}
+                            {/* group name input */}
                             <CustomInput
                                 label="Group Name"
                                 value={userInput.groupName}
@@ -114,7 +114,7 @@ export default function CreateGroupChat() {
                                 required
                             />
 
-                            {/* search and add user input  */}
+                            {/* search and add user input */}
                             <CustomInput
                                 label="Add User"
                                 value={userInput.searchUser}
@@ -126,37 +126,33 @@ export default function CreateGroupChat() {
 
                             {/* Badge status */}
                             {userInput.addUsers?.map((item) => (
-                                <Badge label={item.name} userId={item.userId} removeUser={removeUser} />
+                                <Badge label={item.name} userId={item.userId} removeUser={removeUser} key={item.userId} />
                             ))}
 
                             {/* loading status */}
                             {isSearchUserProcessing && (
-                                <div
-                                    className="mt-5 mx-auto h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                                    role="status"
-                                ></div>
+                                <div className="mt-5 mx-auto h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status"></div>
+                            )}
+
+                            {/* if no user found */}
+                            {!isSearchUserProcessing && searchedUser.length === 0 && (
+                                <p className="text-gray-500 text-center mt-4">No User Found.</p>
                             )}
 
                             {/* map searched result */}
-                            <div className="max-h-[30vh] overflow-y-auto p-2" >
-                            {searchedUser.length !== 0 &&
-                                searchedUser?.map((item) => (
-                                    <AddUser
-                                        addUser={addUser}
-                                        userId={item._id}
-                                        name={item.name}
-                                        email={item.email}
-                                        imageSrc={item.pic}
-                                    />
-                                ))}
-                            </div>    
+                            <div className="max-h-[30vh] overflow-y-auto p-2">
+                                {searchedUser.length !== 0 &&
+                                    searchedUser?.map((item) => (
+                                        <AddUser addUser={addUser} userId={item._id} name={item.name} email={item.email} imageSrc={item.pic} key={item._id} />
+                                    ))}
+                            </div>
 
                             {/* create button */}
                             <button
                                 onClick={handelCreateGroup}
                                 type="button"
                                 disabled={createGroupChatProcessing}
-                                className="text-white mt-5 bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                                className="text-white mt-5 bg-primary-700 hover:bg-primary-500 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             >
                                 {createGroupChatProcessing ? (
                                     <>
