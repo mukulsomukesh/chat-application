@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signInAccount } from '../redux/authReducer/action';
 import CustomInput from '../components/CommonComponents/CustomInput';
 import CustomPasswordInput from '../components/CommonComponents/CustomPasswordInput';
+import logo from "../components/assets/logo.png"
 
 const Signin = () => {
 
@@ -69,13 +70,13 @@ const Signin = () => {
 
 
   return (
-    <section className="bg-primary-50 dark:bg-primary-900">
+    <section className="bg-primary-100 dark:bg-primary-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-primary-900 dark:text-white">
-          <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
+          <img className="w-12 h-12 mr-2" src={logo} alt="logo" />
           Chat Application
         </a>
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-primary-800 dark:border-primary-700">
+        <div className="w-full bg-primary-50  rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-primary-800 dark:border-primary-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-primary-900 md:text-2xl dark:text-white">
               Sign in to continue
@@ -105,7 +106,7 @@ const Signin = () => {
               <button
                 type="submit"
                 disabled={sign_in_processing}
-                className={`w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ${sign_in_processing ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`w-full text-white bg-primary-800 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ${sign_in_processing ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {sign_in_processing ? (
                   <div className="flex items-center justify-center">
@@ -117,8 +118,8 @@ const Signin = () => {
                 )}
               </button>
 
-              <p className="text-sm font-light text-primary-500 dark:text-primary-400">
-                Don't have an account? <span onClick={() => { navigate("/signup") }} className="font-medium cursor-pointer text-primary-600 hover:underline dark:text-primary-500">Sign up</span>
+              <p className="text-sm font-semibold text-primary-500 dark:text-primary-400">
+                Don't have an account? <span onClick={() => { navigate("/signup") }} className="cursor-pointer font-bold ml-2 text-primary-600 hover:underline dark:text-primary-500">Sign up</span>
               </p>
             </form>
           </div>
