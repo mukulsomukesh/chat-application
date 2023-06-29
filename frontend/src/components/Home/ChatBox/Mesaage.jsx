@@ -22,7 +22,7 @@ export default function Message({ type }) {
 
       {/* Text */}
       <div className={`p-2 rounded bg-primary-50 text-primary-900 font-semibold max-w-lg`} data-kt-element="message-text">
-        You'll receive notifications for all issues, pull requests!
+      You'll receive notifications for all issues, pull requests!        You'll receive notifications for all issues, pull requests!        You'll receive notifications for all issues, pull requests!        You'll receive notifications for all issues, pull requests!
       </div>
     </div>
   );

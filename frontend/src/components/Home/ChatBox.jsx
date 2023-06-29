@@ -11,9 +11,9 @@ export default function ChatBox() {
 
     <div className="flex flex-col h-4/5 bg-primary-800 rounded-bl-lg rounded-br-lg px-4 py-2 pb-4">
 
-      <div className="flex h-full flex-col bg-primary-400 p-5 dark:bg-gray-800 rounded-lg mb-2">
+      <div className="flex h-full flex-col max-h-[75vh] overflow-y-auto bg-primary-400 p-5 dark:bg-gray-800 rounded-lg mb-2">
         {/* Content within the div */}
-        <div className="text-white"> <Message type={"send"} /><Message type={"receave"} /> </div>
+        <div className="text-white "> <Message type={"send"} /><Message type={"receave"} /> <Message type={"send"} /><Message type={"receave"} /> <Message type={"send"} /><Message type={"receave"} /> </div>
       </div>
 
       <div className="relative mt-2">
