@@ -18,7 +18,7 @@ const UserCard = ({ name, email, imageSrc, userId }) => {
   // },[])
 
   return (
-    <div onClick={handelCreateChat} className="bg-primary-50 cursor-pointer rounded-lg shadow-md mt-3 hover:shadow-lg hover:ring-2 hover:ring-primary-200 hover:bg-primary-200 transition-shadow duration-200">
+    <div onClick={handelCreateChat} className="bg-primary-100 cursor-pointer rounded-lg shadow-md mt-3 hover:shadow-lg hover:ring-2 hover:ring-primary-200 hover:bg-primary-200 transition-shadow duration-200">
       <div className="flex items-center space-x-4 p-2">
         <div className="flex-shrink-0">
           {imageSrc && (

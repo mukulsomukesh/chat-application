@@ -53,7 +53,7 @@ export default function CreateGroupChat() {
             return;
         }
 
-        if (userInput.addUsers.length <= 2) {
+        if (userInput.addUsers.length < 2) {
             toast.warn('Add a minimum of two users to create a group.', { position: toast.POSITION.BOTTOM_LEFT });
             return;
         }
@@ -92,7 +92,7 @@ export default function CreateGroupChat() {
         <section>
             <button
                 onClick={toggleModal}
-                className="block text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="block text-white bg-primary-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 type="button"
             >
                 Create Group

@@ -14,16 +14,20 @@ export default function AllChats() {
   }, [1])
 
   return (
-    <div className="flex flex-col flex-grow p-2">
+    <div className="flex flex-col flex-grow p-2 mt-3 ">
 
       <CreateGroupChat />
 
+<div className='bg-primary-800 mt-3 rounded-lg p-2  '>
+
+<div className='max-h-[72vh] p-2 overflow-y-auto'>
       {allChat?.map((item) => (
 
         <UserCard name={item.chatName} key={item.id} />
 
       ))}
-
+</div>
+</div>
     </div>
   )
 }
