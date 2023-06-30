@@ -82,4 +82,11 @@ const createGroup = (obj) => async (dispatch) => {
   }
 }
 
-export { searchUsers, createSingleUserChat, getChats, createGroup };
+
+// select user for chat
+const selectUserForChat = (obj) => async (dispatch) =>{
+  dispatch({ type: types.SELECT_USER_FOR_CHAT, payload:obj });
+  console.log(obj)
+}
+
+export { searchUsers, createSingleUserChat, getChats, createGroup, selectUserForChat };

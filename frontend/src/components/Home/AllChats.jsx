@@ -3,6 +3,7 @@ import UserCard from '../UserCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { getChats } from '../../redux/appReducer/action';
 import CreateGroupChat from './AllChats/CreateGroupChat';
+import DisplayChatCard from './AllChats/DisplayChatCard';
 
 export default function AllChats() {
 
@@ -23,7 +24,7 @@ export default function AllChats() {
 <div className='max-h-[72vh] p-2 overflow-y-auto'>
       {allChat?.map((item) => (
 
-        <UserCard name={item.chatName} key={item.id} />
+        <DisplayChatCard item={item} key={item.id} />
 
       ))}
 </div>

@@ -21,6 +21,8 @@ const initialState = {
     createGroupChatMessage: false,
     createdGouup: {},
 
+    selectedUserForChat: null,
+
 }
 
 export const reducer = (state = initialState, action) => {
@@ -122,7 +124,12 @@ export const reducer = (state = initialState, action) => {
                 createGroupChatSuccess: false,
                 createGroupChatFail: true,
                 createGroupChatMessage: "Failed To Create Group",
-                createdGouup:{},            
+                createdGouup: {},
+            };
+        case types.SELECT_USER_FOR_CHAT:
+            return {
+                ...state,
+                selectedUserForChat: payload
             };
 
         default:
