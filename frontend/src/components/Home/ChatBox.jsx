@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import logo from '../assets/white-logo.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { sendMessage } from '../../redux/appReducer/action';
+import { sendMessage, getMessage } from '../../redux/appReducer/action';
 
 
 export default function ChatBox() {
@@ -14,6 +14,11 @@ export default function ChatBox() {
   const sendMessageSuccess = useSelector((state) => state.appReducer.sendMessageSuccess);
   const sendMessageFail = useSelector((state) => state.appReducer.sendMessageFail);
   const sendMessageProcessing = useSelector((state) => state.appReducer.sendMessageProcessing);
+
+  const getMessageSuccess = useSelector((state) => state.appReducer.getMessageSuccess);
+  const getMessageFail = useSelector((state) => state.appReducer.getMessageFail);
+  const getMessageProcessing = useSelector((state) => state.appReducer.getMessageProcessing);
+  const getMessageData = useSelector((state) => state.appReducer.getMessageData);
 
   const [userInput, setUserInput] = useState("");
   const dispatch = useDispatch();
@@ -32,28 +37,34 @@ export default function ChatBox() {
     }
   }
 
-  useEffect(() => {
+  // useEffect(() => {
 
+  //   if(selectedUserForChat){
+  //     const id = selectedUserForChat._id;
+  //     dispatch(getMessage(id))
+  //     console.log("data",getMessageData)  
+  //   }
+
+  // }, [selectedUserForChat])
+
+  useEffect(() => {
     if (!sendMessageProcessing && !sendMessageFail && sendMessageSuccess) {
-      console.log("success");
       setUserInput("");
     }
-
     if (!sendMessageProcessing && sendMessageFail && !sendMessageSuccess) {
       toast.error('Message not send. Try again.', { position: toast.POSITION.BOTTOM_LEFT });
     }
-
   }, [sendMessageSuccess, sendMessageFail, sendMessageProcessing])
 
 
   if (!selectedUserForChat) {
     return (
-        <div className="flex flex-col h-4/5 mt-8 bg-primary-600 rounded-bl-lg rounded-br-lg px-4 py-2 pb-4">
-          <div className="flex flex-col items-center justify-center h-full">
-            <img className="w-20 h-20 mr-2" src={logo} alt="logo" />
-            <p className="text-white">Enjoy You Chat !</p>
-          </div>
+      <div className="flex flex-col h-4/5 mt-8 bg-primary-600 rounded-bl-lg rounded-br-lg px-4 py-2 pb-4">
+        <div className="flex flex-col items-center justify-center h-full">
+          <img className="w-20 h-20 mr-2" src={logo} alt="logo" />
+          <p className="text-white">Enjoy You Chat !</p>
         </div>
+      </div>
     );
   }
 
@@ -63,15 +74,25 @@ export default function ChatBox() {
 
       <div className="flex flex-col h-4/5 bg-primary-800 rounded-bl-lg rounded-br-lg px-4 py-2 pb-4">
         <div className="flex h-full flex-col max-h-[75vh] overflow-y-auto bg-primary-400 p-5 dark:bg-gray-800 rounded-lg mb-2">
-          {/* Content within the div */}
+
+          {getMessageProcessing && (
+            <div className="flex flex-col items-center justify-center h-full">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white"></div>
+              <span className="mr-2 text-white">Loading Messages</span>
+            </div>
+          )}
+
           <div className="text-white">
-            <Message type={'send'} />
-            <Message type={'receave'} />
-            <Message type={'send'} />
-            <Message type={'receave'} />
-            <Message type={'send'} />
-            <Message type={'receave'} />
+
+          { Array.isArray(getMessageData) && getMessageData.length === 0 ? (
+        <p>No messages available</p>
+      ) : (
+        Array.isArray(getMessageData) && getMessageData.map((item) => (
+          <Message item={item} />
+        ))
+      )}
           </div>
+
         </div>
 
         <div className="relative mt-2">

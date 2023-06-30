@@ -26,8 +26,12 @@ const initialState = {
     sendMessageFail: false,
     sendMessage: {},
 
-    selectedUserForChat: null,
+    getMessageProcessing: false,
+    getMessageSuccess: false,
+    getMessageFail: false,
+    getMessageData: {},
 
+    selectedUserForChat: null,
 }
 
 export const reducer = (state = initialState, action) => {
@@ -161,7 +165,32 @@ export const reducer = (state = initialState, action) => {
                 sendMessageSuccess: false,
                 sendMessageFail: true,
                 sendMessage: {},
+            };
 
+        case types.GET_MESSAGE_REQUEST_PROCESSING:
+            return {
+                ...state,
+                getMessageProcessing: true,
+                getMessageSuccess: false,
+                getMessageFail: false,
+                getMessageData: {},
+
+            };
+        case types.GET_MESSAGE_REQUEST_SUCCESS:
+            return {
+                ...state,
+                getMessageProcessing: false,
+                getMessageSuccess: true,
+                getMessageFail: false,
+                getMessageData: payload,
+            };
+        case types.GET_MESSAGE_REQUEST_FAIL:
+            return {
+                ...state,
+                getMessageProcessing: false,
+                getMessageSuccess: false,
+                getMessageFail: true,
+                getMessageData: {},
             };
 
         default:

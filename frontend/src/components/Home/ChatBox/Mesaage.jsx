@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-export default function Message({ type }) {
-  const chatAlign = type==="send" ? 'items-start' : 'items-end';
+export default function Message({ item }) {
+  const parsedData = JSON.parse(localStorage.getItem('chat-app-login-user-data'));
+  let chatAlign =parsedData._id ===item.sender._id ? 'items-start' : 'items-end';
+
 
   return (
     <div className={`flex flex-col ${chatAlign}`}>
       {/* User */}
-      <div className={`flex items-center gap-2 mb-2 ${type=="send"? "flex-row-reverse": ""} `}>
+      <div className={`flex items-center gap-2 mb-2 ${parsedData._id ===item.sender._id? "flex-row-reverse": ""} `}>
         {/* Details */}
         <span className="text-primary-50 text-xs ">2 Hours</span>
 
@@ -21,8 +23,8 @@ export default function Message({ type }) {
       </div>
 
       {/* Text */}
-      <div className={`p-2 rounded bg-primary-50 text-primary-900 font-semibold max-w-lg`} data-kt-element="message-text">
-      You'll receive notifications for all issues, pull requests!        You'll receive notifications for all issues, pull requests!        You'll receive notifications for all issues, pull requests!        You'll receive notifications for all issues, pull requests!
+      <div className={`p-2 rounded bg-primary-50 text-sm text-primary-900  max-w-lg`} data-kt-element="message-text">
+      {item.message}
       </div>
     </div>
   );
