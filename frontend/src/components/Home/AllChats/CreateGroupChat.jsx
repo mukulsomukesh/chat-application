@@ -147,34 +147,38 @@ export default function CreateGroupChat() {
                                     ))}
                             </div>
 
-                            {/* create button */}
-                            <button
-                                onClick={handelCreateGroup}
-                                type="button"
-                                disabled={createGroupChatProcessing}
-                                className="text-white mt-5 bg-primary-700 hover:bg-primary-500 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                            >
-                                {createGroupChatProcessing ? (
-                                    <>
-                                        <div className="flex items-center justify-center">
-                                            <span className="mr-2">Please wait</span>
-                                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                                        </div>
-                                    </>
-                                ) : (
-                                    'Create Group'
-                                )}
-                            </button>
+                            <div className='float-right' >
 
-                            {/* cancel button */}
-                            <button
-                                onClick={toggleModal}
-                                type="button"
-                                disabled={createGroupChatProcessing}
-                                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                            >
-                                Cancel
-                            </button>
+                                {/* cancel button */}
+                                <button
+                                    onClick={toggleModal}
+                                    type="button"
+                                    disabled={createGroupChatProcessing}
+                                    className="text-gray-800 mr-3  bg-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-800 text-sm font-medium px-5 py-2.5  focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                >
+                                    Cancel
+                                </button>
+
+                                {/* create button */}
+                                <button
+                                    onClick={handelCreateGroup}
+                                    type="button"
+                                    disabled={createGroupChatProcessing}
+                                    className="text-white mt-5 bg-primary-700 hover:bg-primary-500 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
+                                >
+                                    {createGroupChatProcessing ? (
+                                        <>
+                                            <div className="flex items-center justify-center">
+                                                <span className="mr-2">Please wait</span>
+                                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        'Create Group'
+                                    )}
+                                </button>
+
+                            </div>
                         </div>
                     </div>
                 </div>
