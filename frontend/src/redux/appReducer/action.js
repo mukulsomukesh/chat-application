@@ -82,11 +82,30 @@ const createGroup = (obj) => async (dispatch) => {
   }
 }
 
-
 // select user for chat
 const selectUserForChat = (obj) => async (dispatch) =>{
   dispatch({ type: types.SELECT_USER_FOR_CHAT, payload:obj });
   console.log(obj)
 }
 
-export { searchUsers, createSingleUserChat, getChats, createGroup, selectUserForChat };
+
+// send message
+const sendMessage = (obj) => async (dispatch) => {
+  dispatch({ type: types.SEND_MESSAGE_REQUEST_PROCESSING });
+  try {
+    const result = await axios.post(`${END_POINT}/message`, obj, {
+      headers: {
+        Authorization: jwtToken()
+      }
+    });
+
+    dispatch({ type: types.SEND_MESSAGE_REQUEST_SUCCESS, payload: result.data });
+
+  } catch (error) {
+    console.log(error)
+
+    dispatch({ type: types.SEND_MESSAGE_REQUEST_FAIL });
+  }
+}
+
+export { searchUsers, createSingleUserChat, getChats, createGroup, selectUserForChat, sendMessage };

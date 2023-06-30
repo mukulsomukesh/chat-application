@@ -21,6 +21,11 @@ const initialState = {
     createGroupChatMessage: false,
     createdGouup: {},
 
+    sendMessageProcessing: false,
+    sendMessageSuccess: false,
+    sendMessageFail: false,
+    sendMessage: {},
+
     selectedUserForChat: null,
 
 }
@@ -130,6 +135,33 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 selectedUserForChat: payload
+            };
+
+        case types.SEND_MESSAGE_REQUEST_PROCESSING:
+            return {
+                ...state,
+                sendMessageProcessing: true,
+                sendMessageSuccess: false,
+                sendMessageFail: false,
+                sendMessage: {},
+
+            };
+        case types.SEND_MESSAGE_REQUEST_SUCCESS:
+            return {
+                ...state,
+                sendMessageProcessing: false,
+                sendMessageSuccess: true,
+                sendMessageFail: false,
+                sendMessage: payload,
+            };
+        case types.SEND_MESSAGE_REQUEST_FAIL:
+            return {
+                ...state,
+                sendMessageProcessing: false,
+                sendMessageSuccess: false,
+                sendMessageFail: true,
+                sendMessage: {},
+
             };
 
         default:
