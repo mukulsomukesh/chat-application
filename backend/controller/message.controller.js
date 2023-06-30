@@ -3,6 +3,8 @@ const Message = require("../models/message.model");
 const User = require("../models/user.model");
 const Chat = require("../models/chat.model");
 
+
+// send messages
 const sendMessage = asyncHandler(async (req, res) => {
   const { content, chatId } = req.body;
 
@@ -34,4 +36,23 @@ const sendMessage = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { sendMessage };
+// get messages
+const getMessages = asyncHandler(async (req, res) => {
+
+  if(!req.params.id){
+    return res.status(500).json({ error: "Invalid or chatId not found in params." });
+  }
+
+  try {
+    const messages = await Message.find({ chat: req.params.id })
+      .populate("sender", "name pic email")
+      .populate("chat");
+
+      res.json(messages);
+
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+  }
+});
+
+module.exports = { sendMessage , getMessages};
