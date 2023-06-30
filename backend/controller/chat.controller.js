@@ -40,7 +40,8 @@ const accessChat = async (req, res) => {
 // get chat
 const getChats = async (req, res) => {
     try {
-        const chats = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } });
+        const chats = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+            .populate('users', 'pic email name _id'); // Populate the 'users' field with only the specified fields
 
         if (chats.length === 0) {
             return res.status(422).json({ message: "No chats found." });
@@ -51,6 +52,7 @@ const getChats = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
 
 
 // create group chat 
