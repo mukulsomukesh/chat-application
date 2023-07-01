@@ -1,19 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AllChats from "../components/Home/AllChats";
 import ChatBox from "../components/Home/ChatBox";
+import {io} from "socket.io-client"
+
+const ENDPOINT = "http://localhost:8080"
+var socket, selectedChatCompare;
 
 const Home = () => {
+
+  const [socketConnected, setSocketConnected] = useState(false);
+  const socket = io(ENDPOINT);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('chat-app-login-user-data'));
+
+    socket.on("connect", () => {
+      console.log("WebSocket client connected");
+    });
+
+    socket.emit("setup", userData);
+    socket.on("connection", ()=> setSocketConnected(true))
+
+  }, [1]);
+
   return (
     <div className="flex flex-wrap justify-between h-screen max-h-full">
       <div className="w-full h-full lg:w-1/4 bg-primary-400 ">
         {/* Content for the first item */}
-        <AllChats />
+        <AllChats socket={socket} />
 
       </div>
       <div className="w-full h-full lg:w-3/4 bg-primary-400 p-4">
         
         {/* Content for the second item */}
-        <ChatBox />
+        <ChatBox socket={socket} />
       </div>
     </div>
   );

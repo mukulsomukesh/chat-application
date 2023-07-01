@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMessage, selectUserForChat } from '../../../redux/appReducer/action';
 
-const DisplayChatCard = ({ item }) => {
+const DisplayChatCard = ({ item, socket }) => {
   const parsedData = JSON.parse(localStorage.getItem('chat-app-login-user-data'));
   const dispatch = useDispatch();
 
@@ -10,6 +10,7 @@ const DisplayChatCard = ({ item }) => {
   const handelSelectUserForChat = () => {
     dispatch(selectUserForChat(item));
     dispatch(getMessage(item._id));
+    socket.emit("join chat", item._id)
   };
 
   // Find the user from item that doesn't match the _id in parsedData

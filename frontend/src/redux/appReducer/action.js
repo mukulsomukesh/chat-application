@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { all } from "axios";
 import * as types from "./actionType";
 
 const END_POINT = "http://localhost:8080/api"
@@ -83,8 +83,8 @@ const createGroup = (obj) => async (dispatch) => {
 }
 
 // select user for chat
-const selectUserForChat = (obj) => async (dispatch) =>{
-  dispatch({ type: types.SELECT_USER_FOR_CHAT, payload:obj });
+const selectUserForChat = (obj) => async (dispatch) => {
+  dispatch({ type: types.SELECT_USER_FOR_CHAT, payload: obj });
 }
 
 
@@ -128,5 +128,28 @@ const getMessage = (id) => async (dispatch) => {
   }
 }
 
+// set web socket recieved message to messages
+const setWebSocketReceivedMessage = (allMessages, receivedMessage) => async (dispatch) => {
+  const messageId = receivedMessage._id;
 
-export { searchUsers, createSingleUserChat, getChats, createGroup, selectUserForChat, sendMessage, getMessage };
+  if (allMessages.length === 0 || !allMessages) {
+    dispatch({ type: types.WEB_SOCKET_RECEIVED_MESSAGE, payload: receivedMessage });
+    return;
+  }
+
+  if (allMessages.length > 1) {
+    const isMessageAlreadyPresent = allMessages.some((message) => message._id === messageId);
+    const isFirstChatMessage = allMessages[0].chat._id === receivedMessage.chat._id;
+
+    if (!isMessageAlreadyPresent && isFirstChatMessage) {
+      dispatch({ type: types.WEB_SOCKET_RECEIVED_MESSAGE, payload: receivedMessage });
+    }
+    return;
+  }
+
+  dispatch({ type: types.WEB_SOCKET_RECEIVED_MESSAGE, payload: receivedMessage });
+};
+
+
+
+export { searchUsers, createSingleUserChat, getChats, createGroup, selectUserForChat, sendMessage, getMessage, setWebSocketReceivedMessage };

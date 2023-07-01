@@ -7,16 +7,16 @@ export default function Message({ item }) {
   const createdAt = new Date(item.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   return (
-    <div className={`flex flex-col ${chatAlign} mt-4`}>
+    <div className={`flex flex-col ${chatAlign} m-3`}>
       {/* User */}
-      <div className={`flex  gap-2 mb-2 ${parsedData._id !== item.sender._id ? 'flex-row-reverse' : ''}`}>
+      <div className={`flex  gap-2 mb-1 ${parsedData._id !== item.sender._id ? 'flex-row-reverse' : ''}`}>
         {/* Text */}
         <div className={`${parsedData._id !== item.sender._id ? "text-left " : "text-right"}`}>
-        <div className={`p-2  bg-primary-800 text-primary-50 text-sm max-w-lg  ${parsedData._id !== item.sender._id ? 'rounded-r-lg rounded-tl-lg' : 'rounded-l-lg rounded-tr-lg'}`} data-kt-element="message-text">
-          {item.message}
-        </div>
-              {/* Time */}
-      <span className="text-primary-50  text-xs mt-1 px-1 ">{createdAt}</span>
+          <div className={`p-2  bg-primary-800 text-primary-50 text-sm max-w-lg  ${parsedData._id !== item.sender._id ? 'rounded-r-lg rounded-tl-lg' : 'rounded-l-lg rounded-tr-lg'}`} data-kt-element="message-text">
+            {item.message}
+          </div>
+          {/* Time */}
+          <span className="text-primary-50  text-xs px-1 ">{createdAt}</span>
 
         </div>
         {/* Avatar */}

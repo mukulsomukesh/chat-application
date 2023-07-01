@@ -24,7 +24,7 @@ const initialState = {
     sendMessageProcessing: false,
     sendMessageSuccess: false,
     sendMessageFail: false,
-    sendMessage: {},
+    sendMessageObj: {},
 
     getMessageProcessing: false,
     getMessageSuccess: false,
@@ -147,7 +147,7 @@ export const reducer = (state = initialState, action) => {
                 sendMessageProcessing: true,
                 sendMessageSuccess: false,
                 sendMessageFail: false,
-                sendMessage: {},
+                sendMessageObj: {},
 
             };
         case types.SEND_MESSAGE_REQUEST_SUCCESS:
@@ -156,7 +156,7 @@ export const reducer = (state = initialState, action) => {
                 sendMessageProcessing: false,
                 sendMessageSuccess: true,
                 sendMessageFail: false,
-                sendMessage: payload,
+                sendMessageObj: payload,
             };
         case types.SEND_MESSAGE_REQUEST_FAIL:
             return {
@@ -164,7 +164,7 @@ export const reducer = (state = initialState, action) => {
                 sendMessageProcessing: false,
                 sendMessageSuccess: false,
                 sendMessageFail: true,
-                sendMessage: {},
+                sendMessageObj: {},
             };
 
         case types.GET_MESSAGE_REQUEST_PROCESSING:
@@ -192,6 +192,12 @@ export const reducer = (state = initialState, action) => {
                 getMessageFail: true,
                 getMessageData: {},
             };
+        case types.WEB_SOCKET_RECEIVED_MESSAGE:
+            return {
+                ...state,
+                getMessageData: [...state.getMessageData, payload]
+            };
+
 
         default:
             return state;
