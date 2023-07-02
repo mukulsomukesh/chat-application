@@ -15,14 +15,10 @@ export default function ChatBox({ socket }) {
   const sendMessageObj = useSelector((state) => state.appReducer.sendMessageObj);
   const sendMessageProcessing = useSelector((state) => state.appReducer.sendMessageProcessing);
 
-  const getMessageSuccess = useSelector((state) => state.appReducer.getMessageSuccess);
-  const getMessageFail = useSelector((state) => state.appReducer.getMessageFail);
+  const notficationsMessages = useSelector((state) => state.appReducer.notficationsMessages);
   const getMessageProcessing = useSelector((state) => state.appReducer.getMessageProcessing);
   const getMessageData = useSelector((state) => state.appReducer.getMessageData);
   
-
-
-
   const [userInput, setUserInput] = useState("");
   const dispatch = useDispatch();
 
@@ -40,13 +36,7 @@ export default function ChatBox({ socket }) {
   };
 
   useEffect(() => {
-    socket.on("message received", (newMessageRec) => {
-      dispatch(setWebSocketReceivedMessage(getMessageData, newMessageRec))
-      // Handle the received message here
-    });
-
     return () => {
-      // Clean up the event listener when the component unmounts
       socket.off("message received");
     };
   }, [socket]);
@@ -55,18 +45,25 @@ export default function ChatBox({ socket }) {
     if (!sendMessageProcessing && !sendMessageFail && sendMessageSuccess) {
       setUserInput("");
       socket.emit("new message", sendMessageObj);
-      dispatch(setWebSocketReceivedMessage(getMessageData, sendMessageObj))
-
-      // socket.on("message received", (newMessageRec) => {
-      //   console.log("Received new message:", newMessageRec);
-      //   // Handle the received message here
-      // });
+      dispatch(setWebSocketReceivedMessage(getMessageData, sendMessageObj, notficationsMessages, selectedUserForChat));
     }
 
     if (!sendMessageProcessing && sendMessageFail && !sendMessageSuccess) {
       toast.error('Message not sent. Try again.', { position: toast.POSITION.BOTTOM_LEFT });
     }
   }, [sendMessageSuccess, sendMessageFail, sendMessageProcessing]);
+
+  useEffect(() => {
+    const handleNewMessageReceived = (newMessageRec) => {
+      dispatch(setWebSocketReceivedMessage(getMessageData, newMessageRec, notficationsMessages, selectedUserForChat));
+    };
+
+    socket.on("message received", handleNewMessageReceived);
+
+    return () => {
+      socket.off("message received", handleNewMessageReceived);
+    };
+  }, [socket, selectedUserForChat, dispatch, getMessageData]);
 
   if (!selectedUserForChat) {
     return (
@@ -100,7 +97,7 @@ export default function ChatBox({ socket }) {
                 <Message item={item} key={item.id} />
               ))
             )}
-            </ScrollableFeed>
+          </ScrollableFeed>
         
         </div>
 

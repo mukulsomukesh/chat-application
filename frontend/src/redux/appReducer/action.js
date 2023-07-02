@@ -110,7 +110,6 @@ const sendMessage = (obj) => async (dispatch) => {
 
 // get message
 const getMessage = (id) => async (dispatch) => {
-  console.log("id = ", id)
   dispatch({ type: types.GET_MESSAGE_REQUEST_PROCESSING });
   try {
     const result = await axios.get(`${END_POINT}/message/${id}`, {
@@ -129,26 +128,40 @@ const getMessage = (id) => async (dispatch) => {
 }
 
 // set web socket recieved message to messages
-const setWebSocketReceivedMessage = (allMessages, receivedMessage) => async (dispatch) => {
-  const messageId = receivedMessage._id;
+const setWebSocketReceivedMessage = (allMessages, receivedMessage, notificationsMessages, selectedUserForChat) => async (dispatch) => {
+  if (Array.isArray(allMessages) && allMessages.length > 0) {
+    const isSameChat = allMessages.some((message) => message.chat._id === receivedMessage.chat._id);
+    const isAlreadyReceived = allMessages.some((message) => message._id === receivedMessage._id);
 
-  if (allMessages.length === 0 || !allMessages) {
-    dispatch({ type: types.WEB_SOCKET_RECEIVED_MESSAGE, payload: receivedMessage });
-    return;
-  }
-
-  if (allMessages.length > 1) {
-    const isMessageAlreadyPresent = allMessages.some((message) => message._id === messageId);
-    const isFirstChatMessage = allMessages[0].chat._id === receivedMessage.chat._id;
-
-    if (!isMessageAlreadyPresent && isFirstChatMessage) {
+    if (isSameChat && !isAlreadyReceived) {
       dispatch({ type: types.WEB_SOCKET_RECEIVED_MESSAGE, payload: receivedMessage });
+    } else if (!isSameChat && !isAlreadyReceived) {
+      if (notificationsMessages && notificationsMessages.length >= 1) {
+        const isAlreadyReceivedNotification = notificationsMessages.some((message) => message._id === receivedMessage.chat._id);
+        if (!isAlreadyReceivedNotification) {
+          dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+        }
+      } else {
+        dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+      }
     }
-    return;
+  } else {
+    if (selectedUserForChat._id === receivedMessage.chat._id) {
+      dispatch({ type: types.WEB_SOCKET_RECEIVED_MESSAGE, payload: receivedMessage });
+    } else {
+      if (notificationsMessages && notificationsMessages.length >= 1) {
+        const isAlreadyReceivedNotification = notificationsMessages.some((message) => message._id === receivedMessage.chat._id);
+        if (!isAlreadyReceivedNotification) {
+          dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+        }
+      } else {
+        dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+      }
+    }
   }
-
-  dispatch({ type: types.WEB_SOCKET_RECEIVED_MESSAGE, payload: receivedMessage });
 };
+
+
 
 
 

@@ -32,6 +32,8 @@ const initialState = {
     getMessageData: {},
 
     selectedUserForChat: null,
+
+    notficationsMessages: [],
 }
 
 export const reducer = (state = initialState, action) => {
@@ -195,7 +197,12 @@ export const reducer = (state = initialState, action) => {
         case types.WEB_SOCKET_RECEIVED_MESSAGE:
             return {
                 ...state,
-                getMessageData: [...state.getMessageData, payload]
+                getMessageData: [...state.getMessageData, payload],
+            };
+        case types.WEB_SOCKET_NOTIFICATION_RECEIVED:
+            return {
+                ...state,
+                notficationsMessages: [...state.notficationsMessages, payload],
             };
 
 
