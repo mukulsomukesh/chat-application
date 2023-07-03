@@ -37,8 +37,8 @@ export default function SideBar() {
 
       {/* sidebar */}
       <aside
-        className={`bg-primary-800 text-white w-64 fixed top-0 ${isOpen ? 'left-0' : '-left-64'
-          } h-screen transform transition-transform duration-300 ease-in-out z-40`}
+        className={`bg-primary-800 text-white w-80 fixed top-0 ${isOpen ? 'left-0' : '-left-80'
+          } h-screen  transform transition-transform duration-300 px-2 ease-in-out z-40`}
       >
         <div className="p-5 flex justify-end">
           <button
@@ -70,10 +70,7 @@ export default function SideBar() {
 
           {/* loading status */}
           {isSearchUserProcessing && (
-            <div
-              className="mt-5 mx-auto h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-              role="status"
-            ></div>
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white mx-auto mt-10"></div>
           )}
 
           {/* if no user found */}
@@ -82,15 +79,18 @@ export default function SideBar() {
           )}
 
           {/* map searched result */}
-          {searchedUser.length !== 0 &&
-            searchedUser?.map((item) => (
-              <UserCard
-                userId={item._id}
-                name={item.name}
-                email={item.email}
-                imageSrc={item.pic}
-              />
-            ))}
+          <div className='mt-7 max-h-[75vh] p-2 overflow-y-auto'>
+            {searchedUser.length !== 0 &&
+              searchedUser?.map((item) => (
+                <UserCard
+                  userId={item._id}
+                  name={item.name}
+                  email={item.email}
+                  imageSrc={item.pic}
+                />
+              ))}
+          </div>
+
         </nav>
       </aside>
     </>

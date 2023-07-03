@@ -11,7 +11,7 @@ const jwtToken = () => {
 // search users
 const searchUsers = (query) => async (dispatch) => {
 
-  if (query.length == 0) {
+  if (query.length === 0) {
     return false
   }
 
@@ -82,4 +82,99 @@ const createGroup = (obj) => async (dispatch) => {
   }
 }
 
-export { searchUsers, createSingleUserChat, getChats, createGroup };
+// select user for chat
+const selectUserForChat = (obj) => async (dispatch) => {
+  dispatch({ type: types.SELECT_USER_FOR_CHAT, payload: obj });
+}
+
+
+// send message
+const sendMessage = (obj) => async (dispatch) => {
+  dispatch({ type: types.SEND_MESSAGE_REQUEST_PROCESSING });
+  try {
+    const result = await axios.post(`${END_POINT}/message`, obj, {
+      headers: {
+        Authorization: jwtToken()
+      }
+    });
+
+    dispatch({ type: types.SEND_MESSAGE_REQUEST_SUCCESS, payload: result.data });
+
+  } catch (error) {
+    console.log(error)
+
+    dispatch({ type: types.SEND_MESSAGE_REQUEST_FAIL });
+  }
+}
+
+
+// get message
+const getMessage = (id) => async (dispatch) => {
+  dispatch({ type: types.GET_MESSAGE_REQUEST_PROCESSING });
+  try {
+    const result = await axios.get(`${END_POINT}/message/${id}`, {
+      headers: {
+        Authorization: jwtToken()
+      }
+    });
+
+    dispatch({ type: types.GET_MESSAGE_REQUEST_SUCCESS, payload: result.data });
+
+  } catch (error) {
+    console.log(error)
+
+    dispatch({ type: types.GET_MESSAGE_REQUEST_FAIL });
+  }
+}
+
+// set web socket recieved message to messages
+const setWebSocketReceivedMessage = (allMessages, receivedMessage, notificationsMessages, selectedUserForChat) => async (dispatch) => {
+  if (!selectedUserForChat) {
+    if (notificationsMessages && notificationsMessages.length >= 1) {
+      const isAlreadyReceivedNotification = notificationsMessages.some((message) => message._id === receivedMessage.chat._id);
+      if (!isAlreadyReceivedNotification) {
+        dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+      }
+    } else {
+      dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+    }
+    return
+  }
+
+  if (Array.isArray(allMessages) && allMessages.length > 0) {
+    const isSameChat = allMessages.some((message) => message.chat._id === receivedMessage.chat._id);
+    const isAlreadyReceived = allMessages.some((message) => message._id === receivedMessage._id);
+
+    if (isSameChat && !isAlreadyReceived) {
+      dispatch({ type: types.WEB_SOCKET_RECEIVED_MESSAGE, payload: receivedMessage });
+    } else if (!isSameChat && !isAlreadyReceived) {
+      if (notificationsMessages && notificationsMessages.length >= 1) {
+        const isAlreadyReceivedNotification = notificationsMessages.some((message) => message._id === receivedMessage.chat._id);
+        if (!isAlreadyReceivedNotification) {
+          dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+        }
+      } else {
+        dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+      }
+    }
+  } else {
+    if (selectedUserForChat._id === receivedMessage.chat._id) {
+      dispatch({ type: types.WEB_SOCKET_RECEIVED_MESSAGE, payload: receivedMessage });
+    } else {
+      if (notificationsMessages && notificationsMessages.length >= 1) {
+        const isAlreadyReceivedNotification = notificationsMessages.some((message) => message._id === receivedMessage.chat._id);
+        if (!isAlreadyReceivedNotification) {
+          dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+        }
+      } else {
+        dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+      }
+    }
+  }
+};
+
+
+
+
+
+export { searchUsers, createSingleUserChat, getChats, createGroup, selectUserForChat, sendMessage, getMessage, setWebSocketReceivedMessage };

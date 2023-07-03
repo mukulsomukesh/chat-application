@@ -25,4 +25,10 @@ const signInAccount = (user) => async (dispatch) => {
     }
 }
 
-export {createAccount, signInAccount};
+// logout user
+const logoutAccount = () => (dispatch)=>{
+    localStorage.removeItem('chat-app-login-user-data');
+    dispatch({type: types.LOGOUT_REQUEST});
+}
+
+export {createAccount, signInAccount, logoutAccount};
