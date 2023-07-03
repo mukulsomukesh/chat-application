@@ -1,12 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { logoutAccount } from '../redux/authReducer/action';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function UserProfile() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const dispatch = useDispatch();
+
   const popupRef = useRef(null);
+  const userData = JSON.parse(localStorage.getItem("chat-app-login-user-data"));
 
   const handleProfileClick = () => {
     setIsPopupOpen(!isPopupOpen);
   };
+
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -22,6 +31,13 @@ export default function UserProfile() {
     };
   }, []);
 
+  const handelLogout = () => {
+    toast.success('Logout Success.', { position: toast.POSITION.BOTTOM_LEFT });
+
+    setTimeout(() => { dispatch(logoutAccount()) }, 1500)
+
+  }
+
   return (
     <div className="relative">
       <button
@@ -30,21 +46,31 @@ export default function UserProfile() {
       >
         <img
           className="w-full h-full object-cover"
-          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80"
+          src={userData.pic}
           alt="Profile"
         />
       </button>
       {isPopupOpen && (
-        <div
-          ref={popupRef}
-          className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl"
-        >
-          {/* Additional information content */}
-          <p>Username: admin</p>
-          <p>Email: admin@gmail.com</p>
-          {/* Add more info as needed */}
+        <div ref={popupRef} class="text-center text-primary-800 absolute right-0 min-w-[200px] w-25vw  bg-primary-50 rounded-md shadow-xl">
+          <div class="text-center p-6 border-b  ">
+            <img
+              className=" h-full w-full rounded-full"
+              src={userData.pic}
+              alt="Profile"
+            />
+
+          </div>
+
+          <p class="pt-2 text-lg font-semibold ">{userData.name}</p>
+          <p class="text-sm ">{userData.email}</p>
+          <button onClick={(e) => { handelLogout() }} class="cursor-pointer w-full mt-5 py-2 px-4 text-sm font-bold hover:bg-primary-800 hover:text-primary-50 ">
+            LOGOUT
+          </button>
         </div>
       )}
+
+      <ToastContainer />
+
     </div>
   );
 }

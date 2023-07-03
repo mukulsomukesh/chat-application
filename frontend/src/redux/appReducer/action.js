@@ -1,4 +1,4 @@
-import axios, { all } from "axios";
+import axios from "axios";
 import * as types from "./actionType";
 
 const END_POINT = "http://localhost:8080/api"
@@ -11,7 +11,7 @@ const jwtToken = () => {
 // search users
 const searchUsers = (query) => async (dispatch) => {
 
-  if (query.length == 0) {
+  if (query.length === 0) {
     return false
   }
 

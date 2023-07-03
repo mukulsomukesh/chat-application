@@ -67,7 +67,7 @@ export default function ChatBox({ socket }) {
 
   if (!selectedUserForChat) {
     return (
-      <div className="flex flex-col h-4/5 mt-8 bg-primary-600 rounded-bl-lg rounded-br-lg px-4 py-2 pb-4">
+      <div className="flex flex-col h-4/5 mt-8 bg-primary-600 rounded-lg px-4 py-2 pb-4">
         <div className="flex flex-col items-center justify-center h-full">
           <img className="w-20 h-20 mr-2" src={logo} alt="logo" />
           <p className="text-white">Enjoy Your Chat!</p>

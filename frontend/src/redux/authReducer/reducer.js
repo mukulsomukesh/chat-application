@@ -65,6 +65,21 @@ export const reducer = (state = initialState, action) => {
                 sign_in_success: true,
                 sign_in_message:"Login Success."                
             };
+        case types.LOGOUT_REQUEST:
+            return{
+                ...state,
+                sign_up_processing: false,
+                sign_up_failed: false,
+                sign_up_success: false,
+                sign_up_message:"",
+                sign_up_user:{},
+            
+                sign_in_processing: false,
+                sign_in_failed: false,
+                sign_in_success: false,
+                sign_in_message:"",
+                sign_in_User: {},               
+            };    
         default:
             return state;   
 }
