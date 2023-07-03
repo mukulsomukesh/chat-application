@@ -18,7 +18,7 @@ export default function ChatBox({ socket }) {
   const notficationsMessages = useSelector((state) => state.appReducer.notficationsMessages);
   const getMessageProcessing = useSelector((state) => state.appReducer.getMessageProcessing);
   const getMessageData = useSelector((state) => state.appReducer.getMessageData);
-  
+
   const [userInput, setUserInput] = useState("");
   const dispatch = useDispatch();
 
@@ -91,14 +91,17 @@ export default function ChatBox({ socket }) {
 
           <ScrollableFeed>
             {Array.isArray(getMessageData) && getMessageData.length === 0 ? (
-              <p>No messages available</p>
+              <div className="flex flex-col items-center justify-center h-full">
+                <img className="w-20 h-20 mr-2" src={logo} alt="logo" />
+                <p className="text-white">Start Chating!</p>
+              </div>
             ) : (
               Array.isArray(getMessageData) && getMessageData.map((item) => (
                 <Message item={item} key={item.id} />
               ))
             )}
           </ScrollableFeed>
-        
+
         </div>
 
         <div className="relative mt-2">

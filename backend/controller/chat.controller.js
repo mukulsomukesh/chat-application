@@ -41,7 +41,8 @@ const accessChat = async (req, res) => {
 const getChats = async (req, res) => {
     try {
         const chats = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
-            .populate('users', 'pic email name _id'); // Populate the 'users' field with only the specified fields
+            .populate('users', 'pic email name _id') // Populate the 'users' field with only the specified fields
+            .populate('latestMessage'); // Populate the 'latestMessage' field
 
         if (chats.length === 0) {
             return res.status(422).json({ message: "No chats found." });
@@ -52,8 +53,6 @@ const getChats = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-
-
 
 // create group chat 
 const createGroupChat = asyncHandler(async (req, res) => {

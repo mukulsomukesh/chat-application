@@ -40,14 +40,14 @@ export default function Notification() {
       {isPopupOpen && (
         <div
           ref={popupRef}
-          className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl"
+          className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl max-h-[50vh] p-2 overflow-y-auto"
         >
 
           {
             notficationsMessages?.map((item) => (
               <div className=" shadow-2xl mb-3 m-2 border-r border-b border-l border-gray-400 rounded-lg p-2">
-                <h4 class="text-sm font-semibold text-gray-900">{item.message}</h4>
-                <span class="text-xs font-semibold">{item.sender.name} </span>  <span class="text-[13px]"> - {new Date(item.createdAt).toLocaleTimeString()}</span>
+                <span class="text-sm font-bold">{item.sender.name} </span>  <span class="text-xs"> - {new Date(item.createdAt).toLocaleTimeString()}</span>
+                <h4 class="text-xs font-medium text-gray-900 truncate">{item.message}</h4>
               </div>
             ))
           }

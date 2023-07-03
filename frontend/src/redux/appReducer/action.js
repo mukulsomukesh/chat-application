@@ -129,6 +129,18 @@ const getMessage = (id) => async (dispatch) => {
 
 // set web socket recieved message to messages
 const setWebSocketReceivedMessage = (allMessages, receivedMessage, notificationsMessages, selectedUserForChat) => async (dispatch) => {
+  if (!selectedUserForChat) {
+    if (notificationsMessages && notificationsMessages.length >= 1) {
+      const isAlreadyReceivedNotification = notificationsMessages.some((message) => message._id === receivedMessage.chat._id);
+      if (!isAlreadyReceivedNotification) {
+        dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+      }
+    } else {
+      dispatch({ type: types.WEB_SOCKET_NOTIFICATION_RECEIVED, payload: receivedMessage });
+    }
+    return
+  }
+
   if (Array.isArray(allMessages) && allMessages.length > 0) {
     const isSameChat = allMessages.some((message) => message.chat._id === receivedMessage.chat._id);
     const isAlreadyReceived = allMessages.some((message) => message._id === receivedMessage._id);
