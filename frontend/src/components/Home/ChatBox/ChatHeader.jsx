@@ -1,5 +1,5 @@
 import React from 'react';
-import UserDetails from './UserDetails';
+import UserDetails from './ChatDetails';
 import { useSelector } from 'react-redux';
 
 export default function ChatHeader() {

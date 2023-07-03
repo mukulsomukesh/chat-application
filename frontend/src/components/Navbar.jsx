@@ -1,6 +1,6 @@
 import React from 'react';
 import UserProfile from './UserProfile';
-import SideBar from './SideBar';
+import SearchUsers from './SearchUsers';
 import Notification from './Notification';
 import { useSelector } from 'react-redux';
 import SmallScreenAllChats from './Home/AllChats/SmallScreenAllChats';
@@ -20,7 +20,7 @@ export default function Navbar() {
             <div className="lg:hidden">
               <SmallScreenAllChats />
             </div>
-            <SideBar />
+            <SearchUsers />
           </section>
 
           <section className="flex flex-wrap gap-4 items-center">
