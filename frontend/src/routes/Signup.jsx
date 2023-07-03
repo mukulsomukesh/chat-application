@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import CustomInput from "../components/CommonComponents/CustomInput"
 import CustomPasswordInput from '../components/CommonComponents/CustomPasswordInput';
-import logo from "../components/assets/logo.png"
+import logo from "../assets/logo.png"
 
 const Signup = () => {
     const navigate = useNavigate();

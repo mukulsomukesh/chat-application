@@ -20,7 +20,8 @@ export default function ChatHeader() {
         <h1 className='text-2xl'>{selectedUserForChat.isGroupChat ? selectedUserForChat.chatName : selectedUser.name}</h1>
       </div>
 
-      <UserDetails />
+{selectedUserForChat.isGroupChat && ( <UserDetails /> ) }
+
 
     </div>
   );

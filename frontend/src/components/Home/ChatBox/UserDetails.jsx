@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { BsInfoCircle } from 'react-icons/bs';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 
 export default function UserDetails() {
+  const selectedUserForChat = useSelector((state) => state.appReducer.selectedUserForChat);
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signInAccount } from '../redux/authReducer/action';
 import CustomInput from '../components/CommonComponents/CustomInput';
 import CustomPasswordInput from '../components/CommonComponents/CustomPasswordInput';
-import logo from "../components/assets/logo.png"
+import logo from "../assets/logo.png"
 
 const Signin = () => {
 

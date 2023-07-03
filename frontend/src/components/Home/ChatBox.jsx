@@ -3,7 +3,7 @@ import { BsEmojiSmile, BsSendFill } from 'react-icons/bs';
 import Message from './ChatBox/Mesaage';
 import ChatHeader from './ChatBox/ChatHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import logo from '../assets/white-logo.png';
+import logo from '../../assets/white-logo.png';
 import { toast, ToastContainer } from 'react-toastify';
 import ScrollableFeed from 'react-scrollable-feed'
 import { sendMessage, setWebSocketReceivedMessage } from '../../redux/appReducer/action';
