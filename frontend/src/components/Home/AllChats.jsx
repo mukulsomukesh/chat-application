@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react'
-import UserCard from '../UserCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { getChats } from '../../redux/appReducer/action';
 import CreateGroupChat from './AllChats/CreateGroupChat';
 import DisplayChatCard from './AllChats/DisplayChatCard';
+import { io } from "socket.io-client";
 
-export default function AllChats({socket}) {
+const ENDPOINT = "http://localhost:8080";
+
+
+export default function AllChats() {
 
   const dispatch = useDispatch();
   const allChat = useSelector((state) => state.appReducer.allChat);
+  const socket = io(ENDPOINT);
+
 
   useEffect(() => {
     dispatch(getChats());
