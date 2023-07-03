@@ -44,6 +44,10 @@ export default function Notification() {
         >
 
           {
+            notficationsMessages.length == 0 && (<p> No Notifications. </p>)
+          }
+
+          {
             notficationsMessages?.map((item) => (
               <div className=" shadow-2xl mb-3 m-2 border-r border-b border-l border-gray-400 rounded-lg p-2">
                 <span class="text-sm font-bold">{item.sender.name} </span>  <span class="text-xs"> - {new Date(item.createdAt).toLocaleTimeString()}</span>

@@ -21,6 +21,10 @@ const initialState = {
     createGroupChatMessage: false,
     createdGouup: {},
 
+    isRenameGroupProcessing: false,
+    isRenameGroupSuccess: false,
+    isRenameGroupFail: false,
+
     sendMessageProcessing: false,
     sendMessageSuccess: false,
     sendMessageFail: false,
@@ -137,6 +141,31 @@ export const reducer = (state = initialState, action) => {
                 createGroupChatMessage: "Failed To Create Group",
                 createdGouup: {},
             };
+
+        case types.RENAME_GROUP_REQUEST_PROCESSING:
+            return {
+                ...state,
+                isRenameGroupProcessing: true,
+                isRenameGroupSuccess: false,
+                isRenameGroupFail: false,
+            };
+        case types.RENAME_GROUP_REQUEST_SUCCESS:
+            return {
+                ...state,
+                selectedUserForChat: payload,
+                isRenameGroupProcessing: false,
+                isRenameGroupSuccess: true,
+                isRenameGroupFail: false,
+
+            };
+        case types.RENAME_GROUP_REQUEST_FAIL:
+            return {
+                ...state,
+                isRenameGroupProcessing: false,
+                isRenameGroupSuccess: false,
+                isRenameGroupFail: true,
+            };
+
         case types.SELECT_USER_FOR_CHAT:
             return {
                 ...state,
