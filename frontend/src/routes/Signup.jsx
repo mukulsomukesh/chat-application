@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import CustomInput from "../components/CommonComponents/CustomInput"
 import CustomPasswordInput from '../components/CommonComponents/CustomPasswordInput';
-import logo from "../components/assets/logo.png"
+import logo from "../assets/logo.png"
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -16,6 +16,7 @@ const Signup = () => {
     const sign_up_message = useSelector((state) => state.authReducer.sign_up_message);
     const sign_up_success = useSelector((state) => state.authReducer.sign_up_success);
     const sign_up_failed = useSelector((state) => state.authReducer.sign_up_failed);
+    const sign_in_success = useSelector((state) => state.authReducer.sign_in_success);
 
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
@@ -67,9 +68,18 @@ const Signup = () => {
 
     //  useEffect
     useEffect(() => {
+
+        //  if user already login
+        if(sign_in_success){
+            navigate('/');
+        }
+
+        //  sign up fail
         if (!sign_up_processing && sign_up_failed && !sign_up_success) {
             toast.error(sign_up_message, { position: toast.POSITION.BOTTOM_LEFT });
         }
+
+        // sign up success
         if (!sign_up_processing && !sign_up_failed && sign_up_success) {
             toast.success('Account Successfully Created.', { position: toast.POSITION.BOTTOM_LEFT });
 
@@ -77,7 +87,7 @@ const Signup = () => {
                 navigate('/signin');
             }, 1000);
         }
-    }, [sign_up_processing, sign_up_success, sign_up_failed]);
+    }, [sign_up_processing, sign_up_success, sign_up_failed, sign_in_success]);
 
     return (
         <section className="bg-primary-100 dark:bg-primary-900">

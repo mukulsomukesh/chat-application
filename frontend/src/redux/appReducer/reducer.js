@@ -21,6 +21,10 @@ const initialState = {
     createGroupChatMessage: false,
     createdGouup: {},
 
+    isRenameGroupProcessing: false,
+    isRenameGroupSuccess: false,
+    isRenameGroupFail: false,
+
     sendMessageProcessing: false,
     sendMessageSuccess: false,
     sendMessageFail: false,
@@ -34,6 +38,8 @@ const initialState = {
     selectedUserForChat: null,
 
     notficationsMessages: [],
+
+    webSocket: "",
 }
 
 export const reducer = (state = initialState, action) => {
@@ -137,6 +143,31 @@ export const reducer = (state = initialState, action) => {
                 createGroupChatMessage: "Failed To Create Group",
                 createdGouup: {},
             };
+
+        case types.RENAME_GROUP_REQUEST_PROCESSING:
+            return {
+                ...state,
+                isRenameGroupProcessing: true,
+                isRenameGroupSuccess: false,
+                isRenameGroupFail: false,
+            };
+        case types.RENAME_GROUP_REQUEST_SUCCESS:
+            return {
+                ...state,
+                selectedUserForChat: payload,
+                isRenameGroupProcessing: false,
+                isRenameGroupSuccess: true,
+                isRenameGroupFail: false,
+
+            };
+        case types.RENAME_GROUP_REQUEST_FAIL:
+            return {
+                ...state,
+                isRenameGroupProcessing: false,
+                isRenameGroupSuccess: false,
+                isRenameGroupFail: true,
+            };
+
         case types.SELECT_USER_FOR_CHAT:
             return {
                 ...state,
@@ -193,6 +224,11 @@ export const reducer = (state = initialState, action) => {
                 getMessageSuccess: false,
                 getMessageFail: true,
                 getMessageData: {},
+            };
+        case types.WEB_SOCKET_CONNECTED:
+            return {
+                ...state,
+                webSocket: payload,
             };
         case types.WEB_SOCKET_RECEIVED_MESSAGE:
             return {

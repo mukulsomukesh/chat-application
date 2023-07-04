@@ -88,6 +88,25 @@ const selectUserForChat = (obj) => async (dispatch) => {
 }
 
 
+// rename group
+const changeGroupName = (obj) => async (dispatch) => {
+  dispatch({ type: types.RENAME_GROUP_REQUEST_PROCESSING });
+  try {
+    const result = await axios.put(`${END_POINT}/chat/rename`, obj, {
+      headers: {
+        Authorization: jwtToken()
+      }
+    });
+
+    dispatch({ type: types.RENAME_GROUP_REQUEST_SUCCESS, payload: result.data });
+
+  } catch (error) {
+    console.log(error)
+
+    dispatch({ type: types.RENAME_GROUP_REQUEST_FAIL });
+  }
+}
+
 // send message
 const sendMessage = (obj) => async (dispatch) => {
   dispatch({ type: types.SEND_MESSAGE_REQUEST_PROCESSING });
@@ -177,4 +196,4 @@ const setWebSocketReceivedMessage = (allMessages, receivedMessage, notifications
 
 
 
-export { searchUsers, createSingleUserChat, getChats, createGroup, selectUserForChat, sendMessage, getMessage, setWebSocketReceivedMessage };
+export { searchUsers, createSingleUserChat, getChats, createGroup, changeGroupName, selectUserForChat, sendMessage, getMessage, setWebSocketReceivedMessage };

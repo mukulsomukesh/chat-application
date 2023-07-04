@@ -3,12 +3,12 @@ import { BsEmojiSmile, BsSendFill } from 'react-icons/bs';
 import Message from './ChatBox/Mesaage';
 import ChatHeader from './ChatBox/ChatHeader';
 import { useDispatch, useSelector } from 'react-redux';
-import logo from '../assets/white-logo.png';
+import logo from '../../assets/white-logo.png';
 import { toast, ToastContainer } from 'react-toastify';
 import ScrollableFeed from 'react-scrollable-feed'
 import { sendMessage, setWebSocketReceivedMessage } from '../../redux/appReducer/action';
 
-export default function ChatBox({ socket }) {
+export default function ChatBox() {
   const selectedUserForChat = useSelector((state) => state.appReducer.selectedUserForChat);
   const sendMessageSuccess = useSelector((state) => state.appReducer.sendMessageSuccess);
   const sendMessageFail = useSelector((state) => state.appReducer.sendMessageFail);
@@ -18,6 +18,7 @@ export default function ChatBox({ socket }) {
   const notficationsMessages = useSelector((state) => state.appReducer.notficationsMessages);
   const getMessageProcessing = useSelector((state) => state.appReducer.getMessageProcessing);
   const getMessageData = useSelector((state) => state.appReducer.getMessageData);
+  const webSocket = useSelector((state) => state.appReducer.webSocket)
 
   const [userInput, setUserInput] = useState("");
   const dispatch = useDispatch();
@@ -37,14 +38,14 @@ export default function ChatBox({ socket }) {
 
   useEffect(() => {
     return () => {
-      socket.off("message received");
+      webSocket.off("message received");
     };
-  }, [socket]);
+  }, [webSocket]);
 
   useEffect(() => {
     if (!sendMessageProcessing && !sendMessageFail && sendMessageSuccess) {
       setUserInput("");
-      socket.emit("new message", sendMessageObj);
+      webSocket.emit("new message", sendMessageObj);
       dispatch(setWebSocketReceivedMessage(getMessageData, sendMessageObj, notficationsMessages, selectedUserForChat));
     }
 
@@ -58,12 +59,12 @@ export default function ChatBox({ socket }) {
       dispatch(setWebSocketReceivedMessage(getMessageData, newMessageRec, notficationsMessages, selectedUserForChat));
     };
 
-    socket.on("message received", handleNewMessageReceived);
+    webSocket.on("message received", handleNewMessageReceived);
 
     return () => {
-      socket.off("message received", handleNewMessageReceived);
+      webSocket.off("message received", handleNewMessageReceived);
     };
-  }, [socket, selectedUserForChat, dispatch, getMessageData]);
+  }, [webSocket, selectedUserForChat, getMessageData]);
 
   if (!selectedUserForChat) {
     return (

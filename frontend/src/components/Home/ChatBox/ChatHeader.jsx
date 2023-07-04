@@ -1,5 +1,5 @@
 import React from 'react';
-import UserDetails from './UserDetails';
+import ChatDetails from './ChatDetails';
 import { useSelector } from 'react-redux';
 
 export default function ChatHeader() {
@@ -20,7 +20,8 @@ export default function ChatHeader() {
         <h1 className='text-2xl'>{selectedUserForChat.isGroupChat ? selectedUserForChat.chatName : selectedUser.name}</h1>
       </div>
 
-      <UserDetails />
+{selectedUserForChat.isGroupChat && ( <ChatDetails /> ) }
+
 
     </div>
   );

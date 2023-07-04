@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 //  create jwt token
 function generateJwtToken(_id) {
     return jwt.sign({ _id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: "3d",
+        expiresIn: "7d",
     });
 }
 

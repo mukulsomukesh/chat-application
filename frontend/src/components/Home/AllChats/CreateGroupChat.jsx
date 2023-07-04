@@ -6,6 +6,7 @@ import Badge from './Badge';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CustomInput from '../../CommonComponents/CustomInput';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 export default function CreateGroupChat() {
     const [isModalVisible, setModalVisibility] = useState(false);
@@ -92,9 +93,10 @@ export default function CreateGroupChat() {
         <section>
             <button
                 onClick={toggleModal}
-                className="block text-white bg-primary-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="flex border-2 border-primary-400 items-center gap-2 text-white bg-primary-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 type="button"
             >
+                <AiOutlinePlus size={"20px"} />
                 Create Group
             </button>
 
