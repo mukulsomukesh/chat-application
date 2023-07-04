@@ -38,6 +38,8 @@ const initialState = {
     selectedUserForChat: null,
 
     notficationsMessages: [],
+
+    webSocket: "",
 }
 
 export const reducer = (state = initialState, action) => {
@@ -222,6 +224,11 @@ export const reducer = (state = initialState, action) => {
                 getMessageSuccess: false,
                 getMessageFail: true,
                 getMessageData: {},
+            };
+        case types.WEB_SOCKET_CONNECTED:
+            return {
+                ...state,
+                webSocket: payload,
             };
         case types.WEB_SOCKET_RECEIVED_MESSAGE:
             return {
