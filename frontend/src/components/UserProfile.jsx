@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { logoutAccount } from '../redux/authReducer/action';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutAccount, updateUserData } from '../redux/authReducer/action';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+import UploadImage from './CommonComponents/UploadImage';
+
 
 export default function UserProfile() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const dispatch = useDispatch();
-  const [image, setImage] = useState(null);
   const popupRef = useRef(null);
-  const userData = JSON.parse(localStorage.getItem("chat-app-login-user-data"));
+  const user_update_success = useSelector((state) => state.authReducer.user_update_success);
+  const user_update_failed = useSelector((state) => state.authReducer.user_update_failed);
+  const user_update_processing = useSelector((state) => state.authReducer.user_update_processing);
+  const user_update_message = useSelector((state) => state.authReducer.user_update_message);
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("chat-app-login-user-data")));
 
   const handleProfileClick = () => {
     setIsPopupOpen(!isPopupOpen);
@@ -30,17 +36,35 @@ export default function UserProfile() {
     };
   }, []);
 
+
+  // display image successfully change message
+  useEffect(() => {
+
+    // image has been changed
+    if (user_update_success && !user_update_processing && !user_update_failed) {
+
+      // get updated value from local storage 
+      setUserData(JSON.parse(localStorage.getItem("chat-app-login-user-data")))
+      toast.success(user_update_message, { position: toast.POSITION.BOTTOM_LEFT });
+    }
+    else if (!user_update_success && !user_update_processing && user_update_failed) {
+      // image not changed
+      toast.error(user_update_message, { position: toast.POSITION.BOTTOM_LEFT });
+    }
+
+  }, [user_update_success, user_update_processing, user_update_failed])
+
   // logout function
   const handelLogout = () => {
     toast.success('Logout Success.', { position: toast.POSITION.BOTTOM_LEFT });
     setTimeout(() => { dispatch(logoutAccount()) }, 1500)
   }
 
-  // upload user profile input
-  const handleImageUpload = (e) => {
-    const uploadedImage = e.target.files[0];
-    setImage(uploadedImage);
-  };
+  // dispatch updateUserData to change user pic
+  const handelFileUpload = (data) => {
+    dispatch(updateUserData(data, userData.token))
+  }
+
 
   return (
     <div className="relative">
@@ -73,18 +97,7 @@ export default function UserProfile() {
           <p className="text-sm">{userData.email}</p>
 
           {/* input button */}
-          <div className="cursor-pointer w-full mt-5 py-2 px-4 text-sm font-bold hover:bg-primary-800 hover:text-primary-50">
-            <label htmlFor="imageUpload" className="py-2 px-5 cursor-pointer">
-              Change Picture
-              <input
-                type="file"
-                id="imageUpload"
-                accept="image/*"
-                style={{ display: 'none' }}
-                onChange={handleImageUpload}
-              />
-            </label>
-          </div>
+          <UploadImage handelFileUpload={handelFileUpload} />
 
           {/* logout button */}
           <button onClick={(e) => { handelLogout() }} className="cursor-pointer w-full py-2 px-4 text-sm font-bold hover:bg-primary-800 hover:text-primary-50">

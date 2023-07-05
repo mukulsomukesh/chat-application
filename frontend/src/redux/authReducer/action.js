@@ -37,4 +37,25 @@ const logoutAccount = () => (dispatch) => {
     dispatch({ type: types.LOGOUT_REQUEST });
 }
 
-export { createAccount, signInAccount, logoutAccount };
+
+// update user data
+const updateUserData = (pic, token) => async (dispatch) => {
+    dispatch({ type: types.UPDATE_USER_DATA_REQUEST_PROCESSING });
+    try {
+        const result = await axios.put("http://localhost:8080/api/user", {pic}, {
+            headers: {
+              Authorization: "Bearer " + String(token)
+            }
+          })
+
+        // update information in local storage also
+        localStorage.removeItem('chat-app-login-user-data');
+        localStorage.setItem("chat-app-login-user-data", JSON.stringify(result.data));
+        dispatch({ type: types.UPDATE_USER_DATA_REQUEST_SUCCESS, payload: "User Data Update Successfully." });
+    } catch (error) {
+        dispatch({ type: types.UPDATE_USER_DATA_REQUEST_FAILED, payload: error.response.data.error });
+    }
+}
+
+
+export { createAccount, signInAccount, logoutAccount, updateUserData };
