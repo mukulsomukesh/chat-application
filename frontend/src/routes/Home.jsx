@@ -19,7 +19,6 @@ const Home = () => {
     );
 
     socket.on("connect", () => {
-      console.log("WebSocket client connected");
       setIsLoading(false);
     });
 

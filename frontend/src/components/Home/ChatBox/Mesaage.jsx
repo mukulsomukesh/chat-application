@@ -5,7 +5,7 @@ export default function Message({ item }) {
   const chatAlign = parsedData._id === item.sender._id ? 'items-end' : 'items-start';
 
   const createdAt = new Date(item.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
+console.log(item)
   return (
     <div className={`flex flex-col ${chatAlign} m-3`}>
       {/* User */}
@@ -25,7 +25,7 @@ export default function Message({ item }) {
         <div className={`bg-primary-50 rounded-full w-9 h-9 flex items-center justify-center`}>
           <img
             alt="Pic"
-            src="https://keenthemes.com/metronic/assets/media/avatars/300-1.jpg"
+            src={item.sender.pic}
             className="w-8 h-8 rounded-full"
           />
         </div>

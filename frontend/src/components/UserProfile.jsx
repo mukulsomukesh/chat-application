@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutAccount, updateUserData } from '../redux/authReducer/action';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
 import UploadImage from './CommonComponents/UploadImage';
 
 
@@ -71,11 +70,11 @@ export default function UserProfile() {
 
       {/* popup opening button */}
       <button
-        className="rounded-full w-10 h-10 overflow-hidden focus:outline-none"
+        className="bg-primary-50 rounded-full w-11 h-11 flex items-center justify-center"
         onClick={handleProfileClick}
       >
         <img
-          className={`w-full h-full object-cover`}
+          className={`w-10 h-10 rounded-full `}
           src={userData.pic}
           alt="Profile"
         />
@@ -94,7 +93,7 @@ export default function UserProfile() {
 
           {/* user data */}
           <p className="pt-2 text-lg font-semibold">{userData.name}</p>
-          <p className="text-sm">{userData.email}</p>
+          <p className="text-sm mb-2">{userData.email}</p>
 
           {/* input button */}
           <UploadImage handelFileUpload={handelFileUpload} />

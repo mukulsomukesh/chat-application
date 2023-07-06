@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeGroupName } from '../../../redux/appReducer/action';
+import { changeGroupName, getChats } from '../../../redux/appReducer/action';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 export default function RenameGroup() {
     const selectedUserForChat = useSelector((state) => state.appReducer.selectedUserForChat);
     const isRenameGroupFail = useSelector((state) => state.appReducer.isRenameGroupFail);
     const isRenameGroupSuccess = useSelector((state) => state.appReducer.isRenameGroupSuccess);
     const isRenameGroupProcessing = useSelector((state) => state.appReducer.isRenameGroupProcessing);
-    const [isChecked, setIsChecked] = useState(false);
     const [groupName, setGroupName] = useState('');
     const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false);
 
+    // toggle modal
+    const toggleModal = () => {
+        setShowModal(!showModal);
+    };
 
     //   handel rename group 
     const handleChangeButtonClick = () => {
@@ -36,7 +40,6 @@ export default function RenameGroup() {
             chatName: groupName.trim()
         }
         dispatch(changeGroupName(obj))
-        console.log('val change');
     };
 
 
@@ -47,7 +50,9 @@ export default function RenameGroup() {
             // if request success
             if (!isRenameGroupFail && isRenameGroupSuccess) {
                 toast.success('Group successfully renamed.', { position: toast.POSITION.BOTTOM_LEFT });
+                dispatch(getChats());
                 setGroupName("")
+                toggleModal()
             }
             // if request faikl
             else if (isRenameGroupFail && !isRenameGroupSuccess) {
@@ -58,45 +63,49 @@ export default function RenameGroup() {
     }, [isRenameGroupFail, isRenameGroupSuccess, isRenameGroupProcessing])
 
     return (
+        <section>
 
-        <div className="mt-4">
+            <button className="cursor-pointer w-full py-2 px-4 text-sm font-bold hover:bg-primary-800 hover:text-primary-50" onClick={toggleModal}>
+                Change Name
+            </button>
 
-            {/* checkbox */}
-            <div className="flex items-center mb-2">
-                <input
-                    className="text-primary-800 h-5 w-5 mr-2"
-                    type="checkbox"
-                    checked={isChecked}
-                    onChange={() => { setIsChecked(!isChecked) }}
-                />
-                <label htmlFor="groupName">Change Group Name</label>
-            </div>
-
-            {/* input with button flex */}
-            <div className="flex">
-                <input
-                    type="text"
-                    className="border rounded-l-md py-1 px-2 flex-grow"
-                    disabled={!isChecked}
-                    value={groupName}
-                    onChange={(e) => { setGroupName(e.target.value) }}
-                />
-                <button
-                    className={`bg-primary-800 hover:bg-primary-900 text-primary-50 rounded-r-md py-1 px-4  ${isChecked && !isRenameGroupProcessing ? '' : 'opacity-50 cursor-not-allowed'
-                        }`}
-                    onClick={handleChangeButtonClick}
-                    disabled={!isChecked && !isRenameGroupProcessing}
-                >
-                    {isRenameGroupProcessing ? (
-                        <div className="flex items-center justify-center">
-                            <span className="mr-2">Renaming</span>
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+            {showModal && (
+                <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
+                    <div className="bg-primary-50 text-primary-800 rounded-lg p-4">
+                        <div className="flex justify-between items-center mb-5">
+                            <h2 className="text-lg font-bold"> Change Group Name </h2>
+                            <button className="hover:text-primary-500 text-primary-800 rounded-md py-1 px-2" onClick={toggleModal}>
+                                <AiOutlineCloseCircle size={'25px'} />
+                            </button>
                         </div>
-                    ) : (
-                        'Rename'
-                    )}
-                </button>
-            </div>
-        </div>
+
+                        {/* input with button flex */}
+                        <input
+                            className="w-full bg-primary-50 border border-primary-300 text-primary-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-primary-700 dark:border-primary-600 dark:placeholder-primary-400 dark:text-white dark:focus:ring-primary-800 dark:focus:border-primary-800"
+                            type="text"
+                            value={groupName}
+                            placeholder={selectedUserForChat.chatName}
+                            onChange={(e) => { setGroupName(e.target.value) }}
+                        />
+
+                        {/* submit button */}
+                        <button
+                            className={`bg-primary-800 float-right mt-5 hover:bg-primary-900 text-primary-50 rounded-md py-1 px-4  ${isRenameGroupProcessing ? 'opacity-50 cursor-not-allowed' : ""}`}
+                            onClick={handleChangeButtonClick}
+                        >
+                            {isRenameGroupProcessing ? (
+                                <div className="flex items-center justify-center">
+                                    <span className="mr-2">Renaming</span>
+                                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                                </div>
+                            ) : (
+                                'Rename'
+                            )}
+                        </button>
+                    </div>
+                </div>
+            )}
+
+        </section>
     );
 }
