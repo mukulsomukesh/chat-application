@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as types from "./actionType";
 
-const END_POINT = "http://localhost:8080/api"
+const END_POINT="https://chatc.onrender.com"
 
 const jwtToken = () => {
   const userData = JSON.parse(localStorage.getItem("chat-app-login-user-data"));
@@ -193,7 +193,15 @@ const setWebSocketReceivedMessage = (allMessages, receivedMessage, notifications
 };
 
 
+// add members in group
+const addMembersInGroup = (obj) => async (dispatch) => {
+
+}
+
+// remove members from group
+const removeMembersFromGroup = (obj) => async (dispatch) => {
+
+}
 
 
-
-export { searchUsers, createSingleUserChat, getChats, createGroup, changeGroupName, selectUserForChat, sendMessage, getMessage, setWebSocketReceivedMessage };
+export { searchUsers, createSingleUserChat, getChats, createGroup, addMembersInGroup, removeMembersFromGroup, changeGroupName, selectUserForChat, sendMessage, getMessage, setWebSocketReceivedMessage };

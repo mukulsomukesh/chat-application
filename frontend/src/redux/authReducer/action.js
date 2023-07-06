@@ -1,11 +1,13 @@
 import axios from "axios";
 import * as types from "./actionType";
 
+const END_POINT="https://chatc.onrender.com"
+
 //  sign up user / create account
 const createAccount = (user) => async (dispatch) => {
     dispatch({ type: types.SIGN_UP_REQUEST_PROCESSING });
     try {
-        const result = await axios.post("http://localhost:8080/api/user", user)
+        const result = await axios.post(`${END_POINT}/api/user`, user)
 
         // remove previous login user info
         localStorage.removeItem('chat-app-login-user-data');
@@ -21,7 +23,7 @@ const signInAccount = (user) => async (dispatch) => {
 
     dispatch({ type: types.SIGN_IN_REQUEST_PROCESSING });
     try {
-        const result = await axios.post("http://localhost:8080/api/user/login", user)
+        const result = await axios.post(`${END_POINT}/api/user/login`, user)
 
         // save user info in local storage
         localStorage.setItem("chat-app-login-user-data", JSON.stringify(result.data));
@@ -42,7 +44,7 @@ const logoutAccount = () => (dispatch) => {
 const updateUserData = (pic, token) => async (dispatch) => {
     dispatch({ type: types.UPDATE_USER_DATA_REQUEST_PROCESSING });
     try {
-        const result = await axios.put("http://localhost:8080/api/user", {pic}, {
+        const result = await axios.put(`${END_POINT}/api/user`, {pic}, {
             headers: {
               Authorization: "Bearer " + String(token)
             }
