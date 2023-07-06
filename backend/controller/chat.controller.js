@@ -129,15 +129,13 @@ const removeFromGroup = asyncHandler(async (req, res) => {
         return res.status(404).json({ error: "Chat not found." });
     }
 
-    const isUserInGroup = chat.users.includes(userId);
+    const adminId = chat.groupAdmin.toString();
 
-    if (!isUserInGroup) {
-        return res.status(422).json({ error: "User is not in the group." });
-    }
+    const filteredUsers = userId.filter(id => id !== adminId);
 
     const updatedChat = await Chat.findByIdAndUpdate(
         chatId,
-        { $pull: { users: userId } },
+        { $pull: { users: { $in: filteredUsers } } },
         { new: true }
     )
         .populate("users", "-password")
@@ -149,6 +147,7 @@ const removeFromGroup = asyncHandler(async (req, res) => {
         return res.status(200).json(updatedChat);
     }
 });
+
 
 
 // add other user to chat group

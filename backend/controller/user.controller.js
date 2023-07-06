@@ -91,5 +91,40 @@ const searchUser = asyncHandler(async(req, res)=>{
 
 })
 
-
-module.exports = { registerUser, authUser, searchUser };
+// Update user data
+const updateUserData = asyncHandler(async (req, res) => {
+    const { name, pic } = req.body;
+    const userId = req.user._id;
+  
+    try {
+      // Find the user by ID
+      const user = await User.findById(userId);
+  
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+  
+      // Update the user's name and/or profile picture if provided
+      if (name) {
+        user.name = name;
+      }
+      if (pic) {
+        user.pic = pic;
+      }
+  
+      // Save the updated user in the database
+      await user.save();
+  
+      res.status(200).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        pic: user.pic,
+        token: generateJwtToken(user._id),
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to update user data" });
+    }
+  });
+  
+module.exports = { registerUser, authUser, searchUser, updateUserData };
