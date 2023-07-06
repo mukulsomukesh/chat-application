@@ -8,11 +8,15 @@ export default function AllChats() {
 
   const dispatch = useDispatch();
   const allChat = useSelector((state) => state.appReducer.allChat);
+  const createGroupChatSuccess = useSelector((state) => state.appReducer.createGroupChatSuccess);
+  const singleUserChatsuccess = useSelector((state) => state.appReducer.singleUserChatsuccess);
+  const addMembersInGroupSuccess = useSelector((state) => state.appReducer.addMembersInGroupSuccess);
+  
 
   useEffect(() => {
     dispatch(getChats());
     
-  }, [1])
+  }, [createGroupChatSuccess, singleUserChatsuccess, addMembersInGroupSuccess])
 
   return (
     <div className="flex flex-col flex-grow p-2 mt-3 ">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import UserCard from './UserCard';
@@ -10,7 +10,15 @@ export default function SideBar() {
   const [userInput, setUserInput] = useState("");
   const searchedUser = useSelector((state) => state.appReducer.searchedUser);
   const isSearchUserProcessing = useSelector((state) => state.appReducer.isSearchUserProcessing);
+  const singleUserChatsuccess = useSelector((state) => state.appReducer.singleUserChatsuccess);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (singleUserChatsuccess) {
+      setIsOpen(false);
+    }
+  }, [singleUserChatsuccess])
 
   const handleOpenSidebar = () => {
     setIsOpen(true);

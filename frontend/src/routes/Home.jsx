@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 import * as types from "../redux/appReducer/actionType";
 import { useDispatch } from "react-redux";
 
-const ENDPOINT = "http://localhost:8080";
+const ENDPOINT="https://chatc.onrender.com"
 
 const Home = () => {
   const [socketConnected, setSocketConnected] = useState(false);
@@ -34,7 +34,7 @@ const Home = () => {
       <div className="w-full h-full lg:w-1/4 bg-primary-400 hidden lg:block">
         {/* Conditional rendering based on the socket connection status */}
         {isLoading ? (
-          <p>Loading...</p>
+          <p></p>
         ) : (
           <AllChats />
         )}
@@ -42,7 +42,7 @@ const Home = () => {
       <div className="w-full h-full lg:w-3/4 bg-primary-400 p-4">
         {/* Conditional rendering based on the socket connection status */}
         {isLoading ? (
-          <p>Loading...</p>
+          <p></p>
         ) : (
           <ChatBox />
         )}
