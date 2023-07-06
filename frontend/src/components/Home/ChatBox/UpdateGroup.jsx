@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RenameGroup from './RenameGroup';
+import RemoveMembers from './RemoveMembers';
+import AddMembers from './AddMembers';
 
 
 export default function UpdateGroup() {
@@ -47,19 +49,14 @@ export default function UpdateGroup() {
             {isPopupOpen && (
                 <div ref={popupRef} className="text-left text-primary-800 absolute right-0 min-w-[200px] w-25vw bg-primary-50 rounded-md shadow-xl">
 
-                    {/* remove members to group  */}
-                    <button className="cursor-pointer w-full py-2 px-4 text-sm font-bold hover:bg-primary-800 hover:text-primary-50">
-                        Add Members
-                    </button>
-
-                    {/* add members to group */}
-                    <button className="cursor-pointer w-full py-2 px-4 text-sm font-bold hover:bg-primary-800 hover:text-primary-50">
-                        Remove Members
-                    </button>
-
-
                     {/* rename group */}
                     <RenameGroup />
+
+                    {/* add members to group */}
+                    <AddMembers />
+
+                    {/* remove members to group  */}
+                    <RemoveMembers />
                 </div>
             )}
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as types from "./actionType";
 
-const END_POINT="https://chatc.onrender.com"
+const END_POINT = "https://chatc.onrender.com"
 
 const jwtToken = () => {
   const userData = JSON.parse(localStorage.getItem("chat-app-login-user-data"));
@@ -17,7 +17,7 @@ const searchUsers = (query) => async (dispatch) => {
 
   dispatch({ type: types.SEARCH_USER_PROCESSING });
   try {
-    const result = await axios.get(`${END_POINT}/user?search=${query}`, {
+    const result = await axios.get(`${END_POINT}/api/user?search=${query}`, {
       headers: {
         Authorization: jwtToken()
       }
@@ -32,7 +32,7 @@ const searchUsers = (query) => async (dispatch) => {
 const createSingleUserChat = (userId) => async (dispatch) => {
   dispatch({ type: types.SINGLE_CHAT_CREATE_PROCESSING });
   try {
-    const result = await axios.post(`${END_POINT}/chat`, { userId: userId }, {
+    const result = await axios.post(`${END_POINT}/api/chat`, { userId: userId }, {
       headers: {
         Authorization: jwtToken()
       }
@@ -51,7 +51,7 @@ const createSingleUserChat = (userId) => async (dispatch) => {
 const getChats = () => async (dispatch) => {
   dispatch({ type: types.ALL_CHATS_REQUEST_PROCESSING });
   try {
-    const result = await axios.get(`${END_POINT}/chat`, {
+    const result = await axios.get(`${END_POINT}/api/chat`, {
       headers: {
         Authorization: jwtToken()
       }
@@ -67,7 +67,7 @@ const getChats = () => async (dispatch) => {
 const createGroup = (obj) => async (dispatch) => {
   dispatch({ type: types.CREATE_GROUP_REQUEST_PROCESSING });
   try {
-    const result = await axios.post(`${END_POINT}/chat/group`, obj, {
+    const result = await axios.post(`${END_POINT}/api/chat/group`, obj, {
       headers: {
         Authorization: jwtToken()
       }
@@ -92,7 +92,7 @@ const selectUserForChat = (obj) => async (dispatch) => {
 const changeGroupName = (obj) => async (dispatch) => {
   dispatch({ type: types.RENAME_GROUP_REQUEST_PROCESSING });
   try {
-    const result = await axios.put(`${END_POINT}/chat/rename`, obj, {
+    const result = await axios.put(`${END_POINT}/api/chat/rename`, obj, {
       headers: {
         Authorization: jwtToken()
       }
@@ -111,7 +111,7 @@ const changeGroupName = (obj) => async (dispatch) => {
 const sendMessage = (obj) => async (dispatch) => {
   dispatch({ type: types.SEND_MESSAGE_REQUEST_PROCESSING });
   try {
-    const result = await axios.post(`${END_POINT}/message`, obj, {
+    const result = await axios.post(`${END_POINT}/api/message`, obj, {
       headers: {
         Authorization: jwtToken()
       }
@@ -131,7 +131,7 @@ const sendMessage = (obj) => async (dispatch) => {
 const getMessage = (id) => async (dispatch) => {
   dispatch({ type: types.GET_MESSAGE_REQUEST_PROCESSING });
   try {
-    const result = await axios.get(`${END_POINT}/message/${id}`, {
+    const result = await axios.get(`${END_POINT}/api/message/${id}`, {
       headers: {
         Authorization: jwtToken()
       }
@@ -195,12 +195,40 @@ const setWebSocketReceivedMessage = (allMessages, receivedMessage, notifications
 
 // add members in group
 const addMembersInGroup = (obj) => async (dispatch) => {
+  dispatch({ type: types.ADD_NEW_MEMBER_GROUP_REQUEST_PROCESSING });
+  try {
+    const result = await axios.put(`${END_POINT}/api/chat/group/user/add`, obj, {
+      headers: {
+        Authorization: jwtToken()
+      }
+    });
 
+    dispatch({ type: types.ADD_NEW_MEMBER_GROUP_REQUEST_SUCCESS, payload: result.data });
+
+  } catch (error) {
+    console.log(error)
+
+    dispatch({ type: types.ADD_NEW_MEMBER_GROUP_REQUEST_FAIL });
+  }
 }
 
 // remove members from group
 const removeMembersFromGroup = (obj) => async (dispatch) => {
+  dispatch({ type: types.REMOVE_MEMBER_FROM_GROUP_REQUEST_PROCESSING });
+  try {
+    const result = await axios.put(`${END_POINT}/api/chat/group/user/remove`, obj, {
+      headers: {
+        Authorization: jwtToken()
+      }
+    });
 
+    dispatch({ type: types.REMOVE_MEMBER_FROM_GROUPP_REQUEST_SUCCESS, payload: result.data });
+
+  } catch (error) {
+    console.log(error)
+
+    dispatch({ type: types.REMOVE_MEMBER_FROM_GROUP_REQUEST_FAIL });
+  }
 }
 
 

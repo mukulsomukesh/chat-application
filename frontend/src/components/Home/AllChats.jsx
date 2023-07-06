@@ -11,12 +11,14 @@ export default function AllChats() {
   const createGroupChatSuccess = useSelector((state) => state.appReducer.createGroupChatSuccess);
   const singleUserChatsuccess = useSelector((state) => state.appReducer.singleUserChatsuccess);
   const addMembersInGroupSuccess = useSelector((state) => state.appReducer.addMembersInGroupSuccess);
+  const isRenameGroupSuccess = useSelector((state) => state.appReducer.isRenameGroupSuccess);
+  const removeMembersFromGroupSuccess = useSelector((state) => state.appReducer.removeMembersFromGroupSuccess);
   
 
   useEffect(() => {
     dispatch(getChats());
     
-  }, [createGroupChatSuccess, singleUserChatsuccess, addMembersInGroupSuccess])
+  }, [createGroupChatSuccess, singleUserChatsuccess, addMembersInGroupSuccess, removeMembersFromGroupSuccess, isRenameGroupSuccess])
 
   return (
     <div className="flex flex-col flex-grow p-2 mt-3 ">

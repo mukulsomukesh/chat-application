@@ -40,7 +40,7 @@ export default function ChatDetails() {
             <p className="text-md font-semibold text-primary-800 truncate dark:text-white mt-1"> Total Members - <span className='font-normal'> {selectedUserForChat.users.length}  </span> </p>
 
             {/* group members */}
-            <div className='max-h-[70vh] overflow-y-auto p-2'>
+            <div className='max-h-[50vh] overflow-y-auto p-2'>
               {selectedUserForChat.users?.map((item) => (
                 <div key={item.id} className=" bg-primary-200 flex items-center space-x-4 p-2 shadow-lg rounded-lg mt-4">
                   <div className={`bg-primary-50 rounded-full w-11 h-11 flex items-center justify-center`}>
