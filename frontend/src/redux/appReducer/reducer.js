@@ -21,6 +21,18 @@ const initialState = {
     createGroupChatMessage: false,
     createdGouup: {},
 
+    addMembersInGroupProcessing: false,
+    addMembersInGroupSuccess: false,
+    addMembersInGroupFail: false,
+    addMembersInGroupMessage: "",
+    addMembersInGroupObj: {},
+
+    removeMembersFromGroupProcessing: false,
+    removeMembersFromGroupSuccess: false,
+    removeMembersFromGroupFail: false,
+    removeMembersFromGroupMessage: "",
+    removeMembersFromGroupObj: {},
+
     isRenameGroupProcessing: false,
     isRenameGroupSuccess: false,
     isRenameGroupFail: false,
@@ -167,6 +179,63 @@ export const reducer = (state = initialState, action) => {
                 isRenameGroupSuccess: false,
                 isRenameGroupFail: true,
             };
+
+        case types.ADD_NEW_MEMBER_GROUP_REQUEST_PROCESSING:
+            return {
+                ...state,
+                addMembersInGroupProcessing: true,
+                addMembersInGroupSuccess: false,
+                addMembersInGroupFail: false,
+                addMembersInGroupMessage: "",
+                addMembersInGroupObj: {},
+            };
+        case types.ADD_NEW_MEMBER_GROUP_REQUEST_SUCCESS:
+            return {
+                ...state,
+                addMembersInGroupProcessing: false,
+                addMembersInGroupSuccess: true,
+                addMembersInGroupFail: false,
+                addMembersInGroupMessage: "Members Successfully added to group",
+                addMembersInGroupObj: payload,
+            };
+        case types.ADD_NEW_MEMBER_GROUP_REQUEST_FAIL:
+            return {
+                ...state,
+                addMembersInGroupProcessing: false,
+                addMembersInGroupSuccess: false,
+                addMembersInGroupFail: true,
+                addMembersInGroupMessage: payload,
+                addMembersInGroupObj: {},
+            };
+
+        case types.REMOVE_MEMBER_FROM_GROUP_REQUEST_PROCESSING:
+            return {
+                ...state,
+                removeMembersFromGroupProcessing: true,
+                removeMembersFromGroupSuccess: false,
+                removeMembersFromGroupFail: false,
+                removeMembersFromGroupMessage: "",
+                removeMembersFromGroupObj: {},
+            };
+        case types.REMOVE_MEMBER_FROM_GROUPP_REQUEST_SUCCESS:
+            return {
+                ...state,
+                removeMembersFromGroupProcessing: false,
+                removeMembersFromGroupSuccess: true,
+                removeMembersFromGroupFail: false,
+                removeMembersFromGroupMessage: "Successfully removed from group",
+                removeMembersFromGroupObj: payload,
+            };
+        case types.REMOVE_MEMBER_FROM_GROUP_REQUEST_FAIL:
+            return {
+                ...state,
+                removeMembersFromGroupProcessing: false,
+                removeMembersFromGroupSuccess: false,
+                removeMembersFromGroupFail: true,
+                removeMembersFromGroupMessage: payload,
+                removeMembersFromGroupObj: {},
+            };
+
 
         case types.SELECT_USER_FOR_CHAT:
             return {
