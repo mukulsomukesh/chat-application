@@ -27,7 +27,7 @@ const server = app.listen(port, console.log("server is running at post = ", port
 
 const io = require("socket.io")(server, {
     cors: {
-        origin: "http://localhost:3000", // Update with your UI server URL
+        origin: "https://chat-app-ca.netlify.app", 
     },
 });
 
