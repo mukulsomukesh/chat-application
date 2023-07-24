@@ -160,16 +160,10 @@ const addToGroup = asyncHandler(async (req, res) => {
     if (!chat) {
         return res.status(404).json({ error: "Chat not found." });
     }
-
-    const isUserAlreadyInGroup = chat.users.includes(userId);
-
-    if (isUserAlreadyInGroup) {
-        return res.status(422).json({ error: "User is already in the group." });
-    }
-
+    
     const newChatObj = await Chat.findByIdAndUpdate(
         chatId,
-        { $push: { users: userId } },
+        { $addToSet: { users: { $each: userId } } },
         { new: true }
     ).populate("users", "-password").populate("groupAdmin", "-password")
 
@@ -177,7 +171,7 @@ const addToGroup = asyncHandler(async (req, res) => {
         res.status(404).json({ error: "Chat Not Found." })
     }
     else {
-        res.status(200).json(newChatObj)
+        res.status(200).json({data:newChatObj, message:"Successfully added to group"})
     }
 
 })

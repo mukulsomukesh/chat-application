@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createGroup, searchUsers } from '../../../redux/appReducer/action';
-import AddUser from './AddUser';
-import Badge from './Badge';
+import AddUser from '../../CommonComponents/AddUser';
+import Badge from '../../CommonComponents/Badge';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CustomInput from '../../CommonComponents/CustomInput';
@@ -21,8 +21,6 @@ export default function CreateGroupChat() {
     const toggleModal = () => {
         setModalVisibility(!isModalVisible);
     };
-
-    useEffect(() => { }, [userInput]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

@@ -4,7 +4,7 @@ import { changeGroupName, getChats, removeMembersFromGroup } from '../../../redu
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import Badge from '../AllChats/Badge';
+import Badge from '../../CommonComponents/Badge';
 
 export default function RemoveMembers() {
 
@@ -16,7 +16,7 @@ export default function RemoveMembers() {
     const removeMembersFromGroupProcessing = useSelector((state) => state.appReducer.removeMembersFromGroupProcessing);
     const [groupMembers, setGroupMembers] = useState(selectedUserForChat.users);
     const [removeMembers, setRemoveMembers] = useState([]);
-
+    
     // toggle modal
     const toggleModal = () => {
         setShowModal(!showModal);
@@ -63,6 +63,31 @@ export default function RemoveMembers() {
     }
     dispatch(removeMembersFromGroup(obj))
     }
+
+
+    // display toast
+    useEffect(() => {
+        if (removeMembersFromGroupSuccess && !removeMembersFromGroupFail && removeMembers.length>=1) {
+            toast.success('Members successfully Removed from group.', { position: toast.POSITION.BOTTOM_LEFT });
+            
+            // remove all value from state
+            setRemoveMembers([])
+            setGroupMembers([])
+
+            setTimeout(() => {
+                toggleModal();
+            }, 1000);
+        }
+
+        if (removeMembersFromGroupFail && !removeMembersFromGroupProcessing && removeMembers.length>=1 ) {
+
+            // remove all value from state
+            setRemoveMembers([])
+            setGroupMembers([])
+
+            toast.error('Failed to remove members from group.', { position: toast.POSITION.BOTTOM_LEFT });
+        }
+    }, [removeMembersFromGroupProcessing, removeMembersFromGroupFail, removeMembersFromGroupSuccess]);
 
     return (
         <div>
