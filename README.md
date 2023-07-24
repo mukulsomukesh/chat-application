@@ -58,5 +58,8 @@
 **Remove User From Group Only For Admin**
 ![remove_user](https://res.cloudinary.com/dfrhy6m3m/image/upload/v1689146005/ymitbkdkz2mlfvrb9gvl.png)
 
+**Add Users To Group Only For Admin**
+![Add_user](https://res.cloudinary.com/dfrhy6m3m/image/upload/v1690197588/lehnw0hfqfnxu8ktajys.png)
+
 
 
