@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    console.log("ok");
+    console.log("welcome to chat app");
 })
 
 app.use("/api/user", userRoutes);
@@ -32,18 +32,13 @@ const io = require("socket.io")(server, {
 });
 
 io.on("connection", (socket) => {
-    console.log("WebSocket server connected");
-
-
     socket.on("setup", (userData) => {
-        console.log("userData = ", userData._id)
         socket.join(userData._id);
         socket.emit("connected")
     })
 
     socket.on("join chat", (room) => {
         socket.join(room)
-        console.log("user join room = ", room)
 
     })
 
