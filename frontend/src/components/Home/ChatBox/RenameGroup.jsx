@@ -81,7 +81,7 @@ export default function RenameGroup() {
 
                         {/* input with button flex */}
                         <input
-                            className="w-full bg-primary-50 border border-primary-300 text-primary-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-primary-700 dark:border-primary-600 dark:placeholder-primary-400 dark:text-white dark:focus:ring-primary-800 dark:focus:border-primary-800"
+                            className="w-full bg-primary-50 border border-primary-300 text-primary-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2.5 dark:bg-primary-700 dark:border-primary-600 dark:placeholder-primary-400  dark:focus:ring-primary-800 dark:focus:border-primary-800"
                             type="text"
                             value={groupName}
                             placeholder={selectedUserForChat.chatName}

@@ -82,7 +82,7 @@ export default function ChatBox() {
       <ChatHeader />
 
       <div className="flex flex-col h-4/5 bg-primary-800 rounded-bl-lg rounded-br-lg px-4 py-2 pb-4">
-        <div className="flex h-full flex-col max-h-[75vh] overflow-y-auto bg-primary-400  dark:bg-gray-800 rounded-lg mb-2">
+        <div className="flex h-full flex-col max-h-[75vh] overflow-y-auto bg-primary-400  rounded-lg mb-2">
           {getMessageProcessing && (
             <div className="flex flex-col items-center justify-center h-full">
               <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white"></div>
@@ -111,7 +111,7 @@ export default function ChatBox() {
             value={userInput}
             onChange={(e) => { setUserInput(e.target.value) }}
             type="text"
-            className="border border-gray-300 bg-primary-50 text-primary-900 font-semibold sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pr-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+            className="border border-gray-300 bg-primary-50 text-primary-900 font-semibold sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pr-10 "
             placeholder="Type your message..."
           />
           <button type="button" className="absolute inset-y-0 right-10 px-8 py-2.7 text-primary-800 focus:outline-none">

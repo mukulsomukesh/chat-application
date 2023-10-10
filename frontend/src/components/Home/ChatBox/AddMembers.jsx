@@ -115,8 +115,8 @@ export default function AddMembers() {
                         </div>
 
                         {/* total members */}
-                        <p className="text-md font-semibold text-primary-800 truncate dark:text-white mt-4"> Group Admin - <span className='font-normal'> {groupAdmin()} </span></p>
-                        <p className="text-md font-semibold text-primary-800 truncate dark:text-white mt-1 mb-4"> Total Members - <span className='font-normal'> {selectedUserForChat.users.length}  </span> </p>
+                        <p className="text-md font-semibold text-primary-800 truncate mt-4"> Group Admin - <span className='font-normal'> {groupAdmin()} </span></p>
+                        <p className="text-md font-semibold text-primary-800 truncate mt-1 mb-4"> Total Members - <span className='font-normal'> {selectedUserForChat.users.length}  </span> </p>
 
                         {/* search and add user input */}
                         <CustomInput

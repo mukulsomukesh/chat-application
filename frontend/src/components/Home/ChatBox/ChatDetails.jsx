@@ -36,8 +36,8 @@ export default function ChatDetails() {
             </div>
 
             {/* total members */}
-            <p className="text-md font-semibold text-primary-800 truncate dark:text-white mt-4"> Group Admin - <span className='font-normal'> {groupAdmin()} </span></p>
-            <p className="text-md font-semibold text-primary-800 truncate dark:text-white mt-1"> Total Members - <span className='font-normal'> {selectedUserForChat.users.length}  </span> </p>
+            <p className="text-md font-semibold text-primary-800 truncate mt-4"> Group Admin - <span className='font-normal'> {groupAdmin()} </span></p>
+            <p className="text-md font-semibold text-primary-800 truncate mt-1"> Total Members - <span className='font-normal'> {selectedUserForChat.users.length}  </span> </p>
 
             {/* group members */}
             <div className='max-h-[50vh] min-w-[20vw] overflow-y-auto p-2'>
@@ -47,10 +47,10 @@ export default function ChatDetails() {
                     <img className="w-10 h-10 rounded-full" src={item.pic} alt={`${item.name} image`} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-md font-semibold text-primary-800 truncate dark:text-white">
+                    <p className="text-md font-semibold text-primary-800 truncate">
                       {item.name}
                     </p>
-                    <p className="text-xs font-semibold text-primary-400 truncate dark:text-white">
+                    <p className="text-xs font-semibold text-primary-400 truncate">
                       {item.email}
                     </p>
                   </div>

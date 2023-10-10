@@ -91,7 +91,7 @@ export default function CreateGroupChat() {
         <section>
             <button
                 onClick={toggleModal}
-                className="flex border-2 border-primary-400 items-center gap-2 text-white bg-primary-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="flex border-2 border-primary-400 items-center gap-2 text-white bg-primary-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                 type="button"
             >
                 <AiOutlinePlus size={"20px"} />
@@ -154,7 +154,7 @@ export default function CreateGroupChat() {
                                     onClick={toggleModal}
                                     type="button"
                                     disabled={createGroupChatProcessing}
-                                    className="text-gray-800 mr-3  bg-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-800 text-sm font-medium px-5 py-2.5  focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                    className="text-gray-800 mr-3  bg-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-800 text-sm font-medium px-5 py-2.5  focus:z-10 "
                                 >
                                     Cancel
                                 </button>
@@ -164,7 +164,7 @@ export default function CreateGroupChat() {
                                     onClick={handelCreateGroup}
                                     type="button"
                                     disabled={createGroupChatProcessing}
-                                    className="text-white mt-5 bg-primary-700 hover:bg-primary-500 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
+                                    className="text-white mt-5 bg-primary-700 hover:bg-primary-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
                                 >
                                     {createGroupChatProcessing ? (
                                         <>

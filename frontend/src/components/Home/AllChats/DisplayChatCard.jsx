@@ -25,10 +25,10 @@ const DisplayChatCard = ({ item }) => {
           <img className="w-10 h-10 rounded-full" src={item.isGroupChat ? "https://cdn-icons-png.flaticon.com/512/2043/2043173.png" : selectedUser.pic} alt={`${item.name} image`} />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-md font-semibold text-primary-800 truncate dark:text-white">
+          <p className="text-md font-semibold text-primary-800 truncate ">
             {item.isGroupChat ? item.chatName : selectedUser.name}
           </p>
-          <p className="text-xs font-semibold text-primary-400 truncate dark:text-white">
+          <p className="text-xs font-semibold text-primary-400 truncate ">
 
             {item.latestMessage ? item.latestMessage.message : ""}
           </p>

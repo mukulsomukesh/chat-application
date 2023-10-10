@@ -65,7 +65,7 @@ export default function SideBar() {
                 setUserInput(e.target.value);
               }}
               placeholder="Search User"
-              className="bg-primary-50 border border-primary-300 text-primary-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pr-10 dark:bg-primary-700 dark:border-primary-600 dark:placeholder-primary-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-primary-50 border border-primary-300 text-primary-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pr-10 "
             />
             <button
               className="absolute rounded-l-none rounded-r-lg inset-y-0 right-0 px-2.5 py-2.5 text-primary-400 hover:bg-primary-700 hover:text-white bg-transparent"

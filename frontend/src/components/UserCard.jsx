@@ -22,10 +22,10 @@ const UserCard = ({ name, email, imageSrc, userId }) => {
             <img className="w-10 h-10 rounded-full" src={imageSrc} alt={`${name} image`} />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-medium text-primary-900 truncate dark:text-white">
+          <p className="text-xs font-medium text-primary-900 truncate">
             {name}
           </p>
-          <p className="text-xs text-primary-500 truncate dark:text-primary-400">
+          <p className="text-xs text-primary-500 truncate ">
             {email}
           </p>
         </div>
