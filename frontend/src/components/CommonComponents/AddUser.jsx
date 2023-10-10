@@ -10,10 +10,10 @@ const AddUser = ({ name, email, imageSrc, userId, addUser }) => {
           )}
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-medium text-gray-900 truncate dark:text-white">
+          <p className="text-xs font-medium text-gray-900 truncate ">
             {name}
           </p>
-          <p className="text-xs text-gray-500 truncate dark:text-gray-400">
+          <p className="text-xs text-gray-500 truncate ">
             {email}
           </p>
         </div>

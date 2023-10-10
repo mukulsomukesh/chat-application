@@ -106,11 +106,11 @@ export default function RemoveMembers() {
                         </div>
 
                         {/* total members */}
-                        <p className="text-md font-semibold text-primary-800 truncate dark:text-white mt-4"> Group Admin - <span className='font-normal'> {groupAdmin()} </span></p>
-                        <p className="text-md font-semibold text-primary-800 truncate dark:text-white mt-1 mb-4"> Total Members - <span className='font-normal'> {selectedUserForChat.users.length}  </span> </p>
+                        <p className="text-md font-semibold text-primary-800 truncate mt-4"> Group Admin - <span className='font-normal'> {groupAdmin()} </span></p>
+                        <p className="text-md font-semibold text-primary-800 truncate mt-1 mb-4"> Total Members - <span className='font-normal'> {selectedUserForChat.users.length}  </span> </p>
 
                         {/* map members */}
-                        <p className="text-md font-semibold text-primary-800 truncate dark:text-white mt-1 "> Group Members </p>
+                        <p className="text-md font-semibold text-primary-800 truncate mt-1 "> Group Members </p>
                         {groupMembers?.map((item) => {
                             if (item._id !== item.groupAdmin) {
                                 return <Badge label={item.name} userId={item._id} removeUser={removeUser} key={item._id} />;
@@ -118,7 +118,7 @@ export default function RemoveMembers() {
                         })}
 
                         {/* removing members  */}
-                        {removeMembers.length > 0 && <p className="text-md font-semibold text-primary-800 truncate dark:text-white mt-4 "> Remove Members </p>}
+                        {removeMembers.length > 0 && <p className="text-md font-semibold text-primary-800 truncate  mt-4 "> Remove Members </p>}
                         {removeMembers?.map((item) => {
                             if (item._id !== item.groupAdmin) {
                                 return <Badge label={item.name} userId={item._id} removeUser={addUser} key={item._id} />;
