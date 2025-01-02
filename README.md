@@ -61,6 +61,30 @@
 **Add Users To Group Only For Admin**
 ![Add_user](https://res.cloudinary.com/dfrhy6m3m/image/upload/v1690197588/lehnw0hfqfnxu8ktajys.png)
 
+
+
+<h1>  Backend Installation </h1>
+<ul> 
+<li> clone repo  </li>
+<li> cd backend </li>
+<li> npm install </li>
+<li> node index.js </li>
+</ul>
+
+<h1>  Frontend Installation </h1>
+<ul> 
+<li> clone repo  </li>
+<li> cd frontend </li>
+<li> npm install </li>
+<li> npm start </li>
+</ul>
+
+<h1> Team Members </h1>
+<ul> 
+<li> Mukul Jatav </li>
+</ul>
+
+
 <h2><i>Let's Connect</i></h2>
 <p align="left">
     <a href="https://www.linkedin.com/in/mukul-jatav/">
